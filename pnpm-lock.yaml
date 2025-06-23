@@ -20,6 +20,9 @@ importers:
       '@nestjs/platform-express':
         specifier: ^11.0.1
         version: 11.1.0(@nestjs/common@11.1.0(reflect-metadata@0.2.2)(rxjs@7.8.2))(@nestjs/core@11.1.0)
+      '@types/hbs':
+        specifier: ^4.0.5
+        version: 4.0.5
       hbs:
         specifier: ^4.2.0
         version: 4.2.0
@@ -978,6 +981,9 @@ packages:
 
   '@types/graceful-fs@4.1.9':
     resolution: {integrity: sha512-olP3sd1qOEe5dXTSaFvQG+02VdRXcdytWLAZsAq1PecU8uqQAhkrnbli7DagjtXKW/Bl7YJbUsa8MPcuc8LHEQ==}
+
+  '@types/hbs@4.0.5':
+    resolution: {integrity: sha512-B08DCNOC1Dg9p/02Ny0wgvZOXQXe13wI02HvaA7p0BARqkNmQP380C6ZeNWuPRA9Qp7ek2p5nt46tRi7JqZQDg==}
 
   '@types/http-cache-semantics@4.0.4':
     resolution: {integrity: sha512-1m0bIFVc7eJWyve9S0RnuRgcQqF/Xd5QsUZAZeQFr1Q3/p9JWoQQEqmVy+DPTNpGXwhgIetAoYF8JSc33q29QA==}
@@ -4380,6 +4386,10 @@ snapshots:
   '@types/graceful-fs@4.1.9':
     dependencies:
       '@types/node': 22.14.1
+
+  '@types/hbs@4.0.5':
+    dependencies:
+      handlebars: 4.7.7
 
   '@types/http-cache-semantics@4.0.4': {}
 
