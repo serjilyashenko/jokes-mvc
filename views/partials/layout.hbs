@@ -1,17 +1,17 @@
 <!DOCTYPE HTML>
 <head>
-  <title>Getting Started: Serving Web Content</title>
+  <title>Jokes MVC</title>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <style>
-    body {
-      background-image:  url('cats.jpg');
-      background-repeat: repeat;
-    }
-  </style>
+  <link href="/static/nes.min.css" rel="stylesheet" />
+  <link href="/static/styles.css" rel="stylesheet">
 </head>
 <body>
-{{> nav }}
-{{> @partial-block}}
+  <div class="container_wrapper">
+    <div class="container">
+      <h1>Jokes MVC</h1>
+      {{> @partial-block}}
+    </div>
+  </div>
 </body>
 </html>

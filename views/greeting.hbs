@@ -1,5 +1,24 @@
 {{#> layout }}
-<p>
-  Hello, {{name}}!
-</p>
+  <nav class="crumbs">
+    <ol>
+      <li class="crumb"><a href="/">Home</a></li>
+      <li class="crumb">Greeting</li>
+    </ol>
+  </nav>
+  <h2>Greeting</h2>
+  <main>
+    <div class="balloon-message">
+      <a href="https://github.com/serjilyashenko" target="_blank" rel="noopener">
+        <i class="nes-octocat animate"></i>
+      </a>
+      <div class="nes-balloon from-left">
+        <p>
+          Hello, {{name}}!
+        </p>
+        <p>
+          I'm reading your name from the query string of the URL.
+        </p>
+      </div>
+    </div>
+  </main>
 {{/layout}}
