@@ -7,6 +7,6 @@ export class GreetingController {
   @Get()
   @Render('greeting')
   getGreeting(@Query('name') name: string) {
-    return { name };
+    return { name: name || 'Anonymous' };
   }
 }
