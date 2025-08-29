@@ -1,0 +1,12 @@
+{{#> layout }}
+  <form action="/jokes" method="post">
+    <div>
+      <textarea spellcheck="true" class="joke" name="joke">{{joke}}</textarea>
+    </div>
+
+    <div>
+      <button type="submit">Save</button>
+      <a href="/jokes/new">Another one</a>
+    </div>
+  </form>
+{{/layout}}

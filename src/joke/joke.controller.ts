@@ -6,6 +6,7 @@ import {
   Patch,
   Param,
   Delete,
+  Render,
 } from '@nestjs/common';
 import { JokeService } from './joke.service';
 import { CreateJokeDto } from './dto/create-joke.dto';
@@ -14,6 +15,17 @@ import { UpdateJokeDto } from './dto/update-joke.dto';
 @Controller('jokes')
 export class JokeController {
   constructor(private readonly jokeService: JokeService) {}
+
+  private readonly JOKE_MOCK =
+    "Why don't scientists trust atoms? Because they make up everything!";
+
+  @Get('new')
+  @Render('joke-create')
+  showCreateView() {
+    // TODO: get random joke from a service
+    // FIXME: Which service? JokeService or external API service?
+    return { joke: this.JOKE_MOCK };
+  }
 
   @Post()
   create(@Body() createJokeDto: CreateJokeDto) {
