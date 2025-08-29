@@ -7,6 +7,8 @@ import {
   Param,
   Delete,
   Render,
+  ValidationPipe,
+  UsePipes,
 } from '@nestjs/common';
 import { JokeService } from './joke.service';
 import { UpdateJokeDto } from './dto/update-joke.dto';
@@ -28,6 +30,7 @@ export class JokeController {
   }
 
   @Post()
+  @UsePipes(new ValidationPipe({ whitelist: true }))
   create(@Body() createJokeDto: CreateJokeDto) {
     return this.jokeService.create(createJokeDto);
   }

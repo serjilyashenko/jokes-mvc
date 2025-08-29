@@ -10,6 +10,8 @@ async function bootstrap() {
 
   app.use(morgan('dev'));
 
+  // app.useGlobalPipes(new ValidationPipe());
+
   app.useStaticAssets(join(__dirname, '..', 'public'));
   app.setBaseViewsDir(join(__dirname, '..', 'views'));
   app.setViewEngine('hbs');
