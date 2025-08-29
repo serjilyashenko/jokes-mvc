@@ -15,6 +15,7 @@ import {
 import { JokeService } from './joke.service';
 import { UpdateJokeDto } from './dto/update-joke.dto';
 import { CreateJokeDto } from './dto/create-joke.dto';
+import { JokeViewDto } from './dto/joke-view.dto';
 
 @Controller('jokes')
 export class JokeController {
@@ -37,6 +38,13 @@ export class JokeController {
   create(@Body() createJokeDto: CreateJokeDto) {
     this.jokeService.create(createJokeDto);
     return;
+  }
+
+  @Get()
+  @Render('jokes')
+  showAllView(): { jokes: Array<JokeViewDto> } {
+    const jokeDtoList = this.jokeService.findAllViewDto();
+    return { jokes: jokeDtoList };
   }
 
   @Get()

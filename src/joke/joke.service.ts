@@ -1,6 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import { UpdateJokeDto } from './dto/update-joke.dto';
 import { CreateJokeDto } from './dto/create-joke.dto';
+import { JokeViewDto } from './dto/joke-view.dto';
+import { plainToInstance } from 'class-transformer';
 
 @Injectable()
 export class JokeService {
@@ -11,6 +13,19 @@ export class JokeService {
 
   findAll() {
     return `This action returns all joke`;
+  }
+
+  findAllViewDto(): Array<JokeViewDto> {
+    // FIXME: Replace with real data from Repository layer
+    // FIXME: Replace with automapper mapper
+    return ['joke 1', 'joke 2', 'joke 3'].map((content, index) =>
+      plainToInstance(JokeViewDto, {
+        id: String(index),
+        content,
+        createdAt: new Date(),
+        password: 'secret', // Should be excluded !
+      }),
+    );
   }
 
   // Not implemented yet

@@ -1,0 +1,12 @@
+{{#> layout }}
+  <p><a href="/">Home</a> / Jokes</p>
+  <p><a href="/jokes/new">Get new one</a></p>
+  <p>Jokes:</p>
+  <p class="content">
+    <ul>
+      {{#each jokes}}
+        <li>{{this.id}} - {{this.content}} [{{this.createdAt}}]</li>
+      {{/each}}
+    </ul>
+  </p>
+{{/layout}}
