@@ -9,8 +9,8 @@ import {
   Render,
 } from '@nestjs/common';
 import { JokeService } from './joke.service';
-import { CreateJokeDto } from './dto/create-joke.dto';
 import { UpdateJokeDto } from './dto/update-joke.dto';
+import { CreateJokeDto } from './dto/create-joke.dto';
 
 @Controller('jokes')
 export class JokeController {
