@@ -9,6 +9,8 @@ import {
   Render,
   ValidationPipe,
   UsePipes,
+  Redirect,
+  HttpStatus,
 } from '@nestjs/common';
 import { JokeService } from './joke.service';
 import { UpdateJokeDto } from './dto/update-joke.dto';
@@ -29,10 +31,12 @@ export class JokeController {
     return { joke: this.JOKE_MOCK };
   }
 
-  @Post()
+  @Post('new')
   @UsePipes(new ValidationPipe({ whitelist: true }))
+  @Redirect('/jokes', HttpStatus.SEE_OTHER)
   create(@Body() createJokeDto: CreateJokeDto) {
-    return this.jokeService.create(createJokeDto);
+    this.jokeService.create(createJokeDto);
+    return;
   }
 
   @Get()

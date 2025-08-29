@@ -5,6 +5,7 @@ import { CreateJokeDto } from './dto/create-joke.dto';
 @Injectable()
 export class JokeService {
   create(createJokeDto: CreateJokeDto) {
+    console.log('>> joke created', createJokeDto.content);
     return 'This action adds a new joke';
   }
 
