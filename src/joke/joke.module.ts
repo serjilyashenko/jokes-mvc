@@ -1,9 +1,9 @@
 import { Module } from '@nestjs/common';
 import { JokeService } from './joke.service';
-import { JokeController } from './joke.controller';
+import { JokeViewController } from './controllers/joke-view.controller';
 
 @Module({
-  controllers: [JokeController],
+  controllers: [JokeViewController],
   providers: [JokeService],
 })
 export class JokeModule {}

@@ -12,13 +12,13 @@ import {
   Redirect,
   HttpStatus,
 } from '@nestjs/common';
-import { JokeService } from './joke.service';
-import { UpdateJokeDto } from './dto/update-joke.dto';
-import { CreateJokeDto } from './dto/create-joke.dto';
-import { JokeViewDto } from './dto/joke-view.dto';
+import { JokeService } from '../joke.service';
+import { UpdateJokeDto } from '../dto/update-joke.dto';
+import { CreateJokeDto } from '../dto/create-joke.dto';
+import { JokeViewDto } from '../dto/joke-view.dto';
 
 @Controller('jokes')
-export class JokeController {
+export class JokeViewController {
   constructor(private readonly jokeService: JokeService) {}
 
   private readonly JOKE_MOCK =
