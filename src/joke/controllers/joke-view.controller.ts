@@ -42,8 +42,8 @@ export class JokeViewController {
 
   @Get()
   @Render('jokes')
-  showAllView(): { jokes: Array<JokeViewDto> } {
-    const jokeDtoList = this.jokeService.findAllViewDto();
+  async showAllView(): Promise<{ jokes: Array<JokeViewDto> }> {
+    const jokeDtoList = await this.jokeService.findAllViewDto();
     return { jokes: jokeDtoList };
   }
 
