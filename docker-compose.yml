@@ -4,7 +4,22 @@ services:
     image: postgres:13.15
     ports:
       - "5432:5432"
+    restart: always
     environment:
-      POSTGRES_DB: postgres
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: secret
+      POSTGRES_DB: ${DATABASE_NAME}
+      POSTGRES_USER: ${DATABASE_USER}
+      POSTGRES_PASSWORD: ${DATABASE_PASSWORD}
+
+  app:
+    build: .
+    ports:
+      - "8080:8080"
+    restart: always
+    environment:
+      NODE_ENV: production
+      DATABASE_HOST: db
+      DATABASE_NAME: ${DATABASE_NAME}
+      DATABASE_USER: ${DATABASE_USER}
+      DATABASE_PASSWORD: ${DATABASE_PASSWORD}
+    depends_on:
+      - db

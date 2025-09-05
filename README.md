@@ -1,11 +1,37 @@
-# JokesMVC: NestJS
+# 🤡 JokesMVC: NestJS
 
-Local development:
+## Run locally with docker-compose
+
+Copy `.env.example` to `.env` and modify it if needed:
 ```bash
-docker compose up -d db # Run DB service from docker-compose.yml
-
-pnpm start:dev # Start NestJS server in dev mode locally
+cp .env.example .env 
 ```
+Start database Docker container:
+```bash
+docker compose up -d
+```
+See [http://localhost:8080](http://localhost:8080) in your browser.
+
+## Dev mode
+
+Copy `.env.example` to `.env` and modify it if needed:
+```bash
+cp .env.example .env 
+```
+Start database Docker container:
+```bash
+docker compose up -d db
+```
+Install dependencies:
+```bash
+corepack enable
+pnpm install
+```
+Run application locally:
+```bash
+pnpm start:dev
+```
+See [http://localhost:8080](http://localhost:8080) in your browser.
 
 > ⚠️ All docs below are from NestJS official repo.\
 > TODO: Modify it to fit JokesMVC project.

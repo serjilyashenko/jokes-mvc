@@ -17,6 +17,6 @@ async function bootstrap() {
   app.setViewEngine('hbs');
   hbs.registerPartials(join(__dirname, '..', '/views/partials')); // rebuild app to apply changes in partials
 
-  await app.listen(process.env.PORT ?? 8080);
+  await app.listen(8080);
 }
 bootstrap();
