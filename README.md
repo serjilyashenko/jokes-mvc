@@ -1,5 +1,15 @@
 # 🤡 JokesMVC: NestJS
 
+- MVC architecture
+- Repository pattern + Dependency Inversion
+- ApiDTOs and ViewDTOs
+
+
+- TypeOrm
+- Automapper
+- PostgreSQL
+- Docker
+
 ## Run locally with docker-compose
 
 Copy `.env.example` to `.env` and modify it if needed:
