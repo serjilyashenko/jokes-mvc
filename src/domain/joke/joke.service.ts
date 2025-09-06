@@ -1,17 +1,15 @@
-import { Injectable } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { Inject, Injectable } from '@nestjs/common';
 import { UpdateJokeDto } from './dto/update-joke.dto';
 import { CreateJokeDto } from './dto/create-joke.dto';
 import { JokeViewDto } from './dto/joke-view.dto';
 import { plainToInstance } from 'class-transformer';
-import { Joke } from './entities/joke.entity';
+import { IJokeRepository } from './interfaces/joke.repository.interface';
 
 @Injectable()
 export class JokeService {
   constructor(
-    @InjectRepository(Joke)
-    private jokeRepository: Repository<Joke>,
+    @Inject('IJokeRepository')
+    private readonly jokeRepository: IJokeRepository,
   ) {}
 
   create(createJokeDto: CreateJokeDto) {
@@ -25,7 +23,8 @@ export class JokeService {
 
   async findAllViewDto(): Promise<Array<JokeViewDto>> {
     // FIXME: Replace with real data from Repository layer
-    console.log(await this.jokeRepository.find());
+    console.log(await this.jokeRepository.findAll());
+    console.log(await this.jokeRepository.findById('1'));
     // FIXME: Replace with automapper mapper
     return ['joke 1', 'joke 2', 'joke 3'].map((content, index) =>
       plainToInstance(JokeViewDto, {
