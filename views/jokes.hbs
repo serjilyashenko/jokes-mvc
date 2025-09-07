@@ -1,12 +1,33 @@
 {{#> layout }}
-  <p><a href="/">Home</a> / Jokes</p>
-  <p><a href="/jokes/new">Get new one</a></p>
-  <p>Jokes:</p>
+  <nav class="crumbs">
+    <ol>
+      <li class="crumb"><a href="/">Home</a></li>
+      <li class="crumb">Jokes</li>
+    </ol>
+  </nav>
+  <div class="button-group">
+    <a href="/jokes/new" class="nes-btn is-primary">Get new one</a>
+  </div>
+  <h2>Jokes:</h2>
   <p class="content">
-    <ul>
+  <div class="nes-table-responsive">
+    <table class="nes-table is-bordered is-centered">
+      <thead>
+      <tr>
+        <th>ID</th>
+        <th>Content</th>
+        <th>Created</th>
+      </tr>
+      </thead>
+      <tbody>
       {{#each jokes}}
-        <li>{{this.id}} - {{this.content}} [{{this.createdAt}}]</li>
+        <tr>
+          <td>{{this.id}}</td>
+          <td>{{this.content}}</td>
+          <td>{{this.createdAt}}</td>
+        </tr>
       {{/each}}
-    </ul>
-  </p>
+      </tbody>
+    </table>
+  </div>
 {{/layout}}

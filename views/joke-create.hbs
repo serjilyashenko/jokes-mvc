@@ -1,13 +1,24 @@
 {{#> layout }}
-  <p><a href="/">Home</a> / <a href="/jokes">Jokes</a>  / New</p>
+  <nav class="crumbs">
+    <ol>
+      <li class="crumb"><a href="/">Home</a></li>
+      <li class="crumb"><a href="/jokes">Jokes</a></li>
+      <li class="crumb">New</li>
+    </ol>
+  </nav>
   <form action="" method="post">
     <div>
-      <textarea spellcheck="true" class="joke" name="content">{{joke}}</textarea>
+      <label for="joke-input">New Joke</label>
+      <textarea
+        id="joke-input"
+        spellcheck="true"
+        class="joke nes-textarea"
+        name="content"
+      >{{joke}}</textarea>
     </div>
-
-    <div>
-      <button type="submit">Save</button>
-      <a href="/jokes/new">Another one</a>
+    <div class="button-group">
+      <a href="/jokes/new" class="nes-btn">Another one</a>
+      <button type="submit" class="nes-btn is-primary">Save</button>
     </div>
   </form>
 {{/layout}}

@@ -33,6 +33,10 @@ body {
     }
 }
 
+h1 {
+    margin-bottom: 16px;
+}
+
 .crumbs {
     margin-bottom: 24px;
 }
@@ -46,6 +50,11 @@ body {
     display: inline-block;
     content: ">";
     padding: 0 8px;
+}
+
+.button-group {
+    text-align: right;
+    margin-top: 16px;
 }
 
 .balloon-message {
