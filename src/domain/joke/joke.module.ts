@@ -5,9 +5,10 @@ import { JokeService } from './joke.service';
 import { JokeEntity } from './entities/joke.entity';
 import { JokeTypeormRepository } from '../../infra/database/reppositories/joke.typeorm.repository';
 import { JokeMapper } from './mappers/joke.mapper';
+import { ExternalJokeModule } from '../../client/external-joke/external-joke.module';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([JokeEntity])],
+  imports: [TypeOrmModule.forFeature([JokeEntity]), ExternalJokeModule],
   controllers: [JokeViewController],
   providers: [
     JokeService,
