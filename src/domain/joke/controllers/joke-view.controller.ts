@@ -64,6 +64,6 @@ export class JokeViewController {
 
   @Delete(':id')
   remove(@Param('id') id: string) {
-    return this.jokeService.remove(+id);
+    return this.jokeService.remove(id);
   }
 }

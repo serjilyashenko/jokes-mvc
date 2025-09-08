@@ -38,7 +38,7 @@ export class JokeService {
     return `This action updates a #${id} joke`;
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} joke`;
+  async remove(id: string): Promise<void> {
+    await this.jokeRepository.delete(id);
   }
 }
