@@ -1,4 +1,4 @@
-import { DeepPartial, FindOptionsWhere, Repository } from 'typeorm';
+import { FindOptionsWhere, Repository } from 'typeorm';
 import { Injectable } from '@nestjs/common';
 import { BaseEntity } from '../entitites/base.entity';
 import { IBaseRepository } from '../interfaces/base.repository.interface';
@@ -17,8 +17,7 @@ export class BaseTypeOrmRepository<Entity extends BaseEntity>
     return this.repository.findOneBy({ id } as FindOptionsWhere<Entity>);
   }
 
-  async create(data: DeepPartial<Entity>): Promise<Entity> {
-    const entity: Entity = this.repository.create(data);
+  async save(entity: Entity): Promise<Entity> {
     return this.repository.save(entity);
   }
 

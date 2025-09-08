@@ -14,9 +14,9 @@ export class JokeService {
     private readonly jokeMapper: JokeMapper,
   ) {}
 
-  create(createJokeDto: CreateJokeDto) {
-    console.log('>> joke created', createJokeDto.content);
-    return 'This action adds a new joke';
+  async create(createJokeDto: CreateJokeDto): Promise<Joke> {
+    const jokeEntity: Joke = Joke.create({ ...createJokeDto });
+    return await this.jokeRepository.save(jokeEntity);
   }
 
   findAll() {
