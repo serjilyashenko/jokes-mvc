@@ -4,7 +4,7 @@ import { CreateJokeDto } from './dto/create-joke.dto';
 import { JokeViewDto } from './dto/joke-view.dto';
 import { IJokeRepository } from './interfaces/joke.repository.interface';
 import { JokeMapper } from './mappers/joke.mapper';
-import { Joke } from './entities/joke.entity';
+import { JokeEntity } from './entities/joke.entity';
 
 @Injectable()
 export class JokeService {
@@ -14,8 +14,8 @@ export class JokeService {
     private readonly jokeMapper: JokeMapper,
   ) {}
 
-  async create(createJokeDto: CreateJokeDto): Promise<Joke> {
-    const jokeEntity: Joke = Joke.create({ ...createJokeDto });
+  async create(createJokeDto: CreateJokeDto): Promise<JokeEntity> {
+    const jokeEntity: JokeEntity = JokeEntity.create({ ...createJokeDto });
     return await this.jokeRepository.save(jokeEntity);
   }
 
@@ -24,7 +24,7 @@ export class JokeService {
   }
 
   async findAllViewDto(): Promise<Array<JokeViewDto>> {
-    const jokeEntities: Joke[] = await this.jokeRepository.findAll();
+    const jokeEntities: JokeEntity[] = await this.jokeRepository.findAll();
     return this.jokeMapper.toViewDto(jokeEntities);
   }
 
