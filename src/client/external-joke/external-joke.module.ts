@@ -1,9 +1,10 @@
+import { HttpModule } from '@nestjs/axios';
 import { Module } from '@nestjs/common';
 import { IcanhazdadJokeJokeService } from './external-joke.service';
 import { IExternalJokeServiceToken } from '../../domain/joke/interfaces/external-joke.service.interface';
 
 @Module({
-  imports: [],
+  imports: [HttpModule],
   providers: [
     {
       provide: IExternalJokeServiceToken,

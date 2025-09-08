@@ -30,8 +30,8 @@ export class JokeService {
   }
 
   async getCreateViewDto(): Promise<CreateJokeViewDto> {
-    const externalJokeDto = await this.externalJokeService.getRandomJoke();
-    return { content: externalJokeDto.joke };
+    const externalJokeEntity = await this.externalJokeService.getJoke();
+    return { content: externalJokeEntity?.joke || '' };
   }
 
   findAll() {

@@ -1,7 +1,7 @@
-import { ExternalJokeDto } from '../../../client/external-joke/dto/external-joke.dto';
+import { ExternalJokeEntity } from '../../../client/external-joke/entities/external-joke.entity';
 
 export const IExternalJokeServiceToken = 'IExternalJokeService';
 
 export interface IExternalJokeService {
-  getRandomJoke(): Promise<ExternalJokeDto>;
+  getJoke(): Promise<ExternalJokeEntity | null>;
 }
