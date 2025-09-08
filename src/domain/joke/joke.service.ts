@@ -2,7 +2,10 @@ import { Inject, Injectable } from '@nestjs/common';
 import { UpdateJokeDto } from './dto/update-joke.dto';
 import { CreateJokeDto } from './dto/create-joke.dto';
 import { JokeViewDto } from './dto/joke-view.dto';
-import { IJokeRepository } from './interfaces/joke.repository.interface';
+import {
+  IJokeRepository,
+  IJokeRepositoryToken,
+} from './interfaces/joke.repository.interface';
 import { JokeMapper } from './mappers/joke.mapper';
 import { JokeEntity } from './entities/joke.entity';
 import {
@@ -14,7 +17,7 @@ import { CreateJokeViewDto } from './dto/create-joke-view.dto';
 @Injectable()
 export class JokeService {
   constructor(
-    @Inject('IJokeRepository')
+    @Inject(IJokeRepositoryToken)
     private readonly jokeRepository: IJokeRepository,
     @Inject(IExternalJokeServiceToken)
     private readonly externalJokeService: IExternalJokeService,

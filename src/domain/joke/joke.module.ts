@@ -6,6 +6,7 @@ import { JokeEntity } from './entities/joke.entity';
 import { JokeTypeormRepository } from '../../infra/database/reppositories/joke.typeorm.repository';
 import { JokeMapper } from './mappers/joke.mapper';
 import { ExternalJokeModule } from '../../client/external-joke/external-joke.module';
+import { IJokeRepositoryToken } from './interfaces/joke.repository.interface';
 
 @Module({
   imports: [TypeOrmModule.forFeature([JokeEntity]), ExternalJokeModule],
@@ -14,7 +15,7 @@ import { ExternalJokeModule } from '../../client/external-joke/external-joke.mod
     JokeService,
     JokeMapper,
     {
-      provide: 'IJokeRepository',
+      provide: IJokeRepositoryToken,
       useClass: JokeTypeormRepository,
     },
   ],
