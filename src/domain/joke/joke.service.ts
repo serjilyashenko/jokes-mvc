@@ -13,6 +13,7 @@ import {
   IExternalJokeServiceToken,
 } from './interfaces/external-joke.service.interface';
 import { CreateJokeViewDto } from './dto/create-joke-view.dto';
+import { JokeApiDto } from './dto/joke-api.dto';
 
 @Injectable()
 export class JokeService {
@@ -34,8 +35,9 @@ export class JokeService {
     return { content: externalJokeEntity?.joke || '' };
   }
 
-  findAll() {
-    return `This action returns all joke`;
+  async findAllApiDto(): Promise<JokeApiDto[]> {
+    const jokeEntities: JokeEntity[] = await this.jokeRepository.findAll();
+    return this.jokeMapper.toApiDto(jokeEntities);
   }
 
   async findAllViewDto(): Promise<Array<JokeViewDto>> {
@@ -43,14 +45,26 @@ export class JokeService {
     return this.jokeMapper.toViewDto(jokeEntities);
   }
 
-  // Not implemented yet
-  findOne(id: number) {
-    return `This action returns a #${id} joke`;
+  async findOne(id: string): Promise<JokeApiDto | null> {
+    const jokeEntity = await this.jokeRepository.findById(id);
+    if (!jokeEntity) {
+      return null;
+    }
+    return this.jokeMapper.toApiDto(jokeEntity);
   }
 
-  // Not implemented yet
-  update(id: number, updateJokeDto: UpdateJokeDto) {
-    return `This action updates a #${id} joke`;
+  async update(
+    id: string,
+    updateJokeDto: UpdateJokeDto,
+  ): Promise<JokeApiDto | null> {
+    const originalJokeEntity = await this.jokeRepository.findById(id);
+    if (!originalJokeEntity) {
+      return null;
+    }
+    const updatedJokeEntity = JokeEntity.merge(originalJokeEntity, {
+      ...updateJokeDto,
+    });
+    return this.jokeRepository.save(updatedJokeEntity);
   }
 
   async remove(id: string): Promise<void> {

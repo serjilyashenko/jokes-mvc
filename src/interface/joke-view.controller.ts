@@ -3,7 +3,6 @@ import {
   Get,
   Post,
   Body,
-  Patch,
   Param,
   Delete,
   Render,
@@ -12,11 +11,11 @@ import {
   Redirect,
   HttpStatus,
 } from '@nestjs/common';
-import { JokeService } from '../joke.service';
-import { UpdateJokeDto } from '../dto/update-joke.dto';
-import { CreateJokeDto } from '../dto/create-joke.dto';
-import { JokeViewDto } from '../dto/joke-view.dto';
-import { CreateJokeViewDto } from '../dto/create-joke-view.dto';
+import { JokeService } from '../domain/joke/joke.service';
+import { CreateJokeDto } from '../domain/joke/dto/create-joke.dto';
+import { JokeViewDto } from '../domain/joke/dto/joke-view.dto';
+import { CreateJokeViewDto } from '../domain/joke/dto/create-joke-view.dto';
+import { ValidateIntPipe } from './pipes/ValidateIntPipe';
 
 @Controller('jokes')
 export class JokeViewController {
@@ -43,23 +42,8 @@ export class JokeViewController {
     return { jokes: jokeDtoList };
   }
 
-  @Get()
-  findAll() {
-    return this.jokeService.findAll();
-  }
-
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.jokeService.findOne(+id);
-  }
-
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateJokeDto: UpdateJokeDto) {
-    return this.jokeService.update(+id, updateJokeDto);
-  }
-
   @Delete(':id')
-  remove(@Param('id') id: string) {
+  remove(@Param('id', ValidateIntPipe) id: string) {
     return this.jokeService.remove(id);
   }
 }

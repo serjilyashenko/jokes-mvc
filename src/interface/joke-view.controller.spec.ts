@@ -1,6 +1,6 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { JokeViewController } from './joke-view.controller';
-import { JokeService } from '../joke.service';
+import { JokeService } from '../domain/joke/joke.service';
 
 describe('JokeController', () => {
   let controller: JokeViewController;
