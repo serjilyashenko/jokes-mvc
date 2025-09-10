@@ -41,7 +41,8 @@ Run application locally:
 ```bash
 pnpm start:dev
 ```
-See [http://localhost:8080](http://localhost:8080) in your browser.
+See [http://localhost:8080](http://localhost:8080) in your browser.\
+Or [http://localhost:8080/api](http://localhost:8080/api) for swagger api docs.
 
 > ⚠️ All docs below are from NestJS official repo.\
 > TODO: Modify it to fit JokesMVC project.

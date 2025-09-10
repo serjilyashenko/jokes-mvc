@@ -1,8 +1,12 @@
+import { ApiProperty } from '@nestjs/swagger';
+
 export class JokeApiDto {
-  // FIXME: OpenAPI decorators
+  @ApiProperty()
   id: string;
 
+  @ApiProperty()
   content: string;
 
+  @ApiProperty()
   createdAt: Date;
 }

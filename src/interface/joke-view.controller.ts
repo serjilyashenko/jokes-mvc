@@ -11,6 +11,7 @@ import {
   Redirect,
   HttpStatus,
 } from '@nestjs/common';
+import { ApiExcludeController } from '@nestjs/swagger';
 import { JokeService } from '../domain/joke/joke.service';
 import { CreateJokeDto } from '../domain/joke/dto/create-joke.dto';
 import { JokeViewDto } from '../domain/joke/dto/joke-view.dto';
@@ -18,6 +19,7 @@ import { CreateJokeViewDto } from '../domain/joke/dto/create-joke-view.dto';
 import { ValidateIntPipe } from './pipes/ValidateIntPipe';
 
 @Controller('jokes')
+@ApiExcludeController()
 export class JokeViewController {
   constructor(private readonly jokeService: JokeService) {}
 

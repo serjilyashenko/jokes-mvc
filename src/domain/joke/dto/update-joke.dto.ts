@@ -1,4 +1,9 @@
-import { PartialType } from '@nestjs/mapped-types';
-import { CreateJokeDto } from './create-joke.dto';
+import { ApiProperty } from '@nestjs/swagger';
+import { IsOptional, IsString } from 'class-validator';
 
-export class UpdateJokeDto extends PartialType(CreateJokeDto) {}
+export class UpdateJokeDto {
+  @ApiProperty()
+  @IsString()
+  @IsOptional()
+  content: string;
+}
