@@ -5,8 +5,12 @@ import { NestFactory } from '@nestjs/core';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { NestExpressApplication } from '@nestjs/platform-express';
 import { AppModule } from './app.module';
+import { AppDataSource } from './data-soruce';
 
 async function bootstrap() {
+  await AppDataSource.initialize();
+  await AppDataSource.runMigrations();
+
   const app = await NestFactory.create<NestExpressApplication>(AppModule);
 
   app.use(morgan('dev'));

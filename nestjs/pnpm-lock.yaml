@@ -44,6 +44,9 @@ importers:
       class-validator:
         specifier: 0.14.2
         version: 0.14.2
+      dotenv:
+        specifier: 17.2.2
+        version: 17.2.2
       hbs:
         specifier: 4.2.0
         version: 4.2.0
@@ -59,6 +62,9 @@ importers:
       rxjs:
         specifier: 7.8.2
         version: 7.8.2
+      ts-node:
+        specifier: 10.9.2
+        version: 10.9.2(@swc/core@1.11.21)(@types/node@22.14.1)(typescript@5.8.3)
       typeorm:
         specifier: 0.3.26
         version: 0.3.26(pg@8.16.3)(reflect-metadata@0.2.2)(ts-node@10.9.2(@swc/core@1.11.21)(@types/node@22.14.1)(typescript@5.8.3))
@@ -129,9 +135,6 @@ importers:
       ts-loader:
         specifier: 9.5.2
         version: 9.5.2(typescript@5.8.3)(webpack@5.99.6(@swc/core@1.11.21))
-      ts-node:
-        specifier: 10.9.2
-        version: 10.9.2(@swc/core@1.11.21)(@types/node@22.14.1)(typescript@5.8.3)
       tsconfig-paths:
         specifier: 4.2.0
         version: 4.2.0
@@ -1776,6 +1779,10 @@ packages:
 
   dotenv@16.6.1:
     resolution: {integrity: sha512-uBq4egWHTcTt33a72vpSG0z3HnPuIl6NqYcTrKEg2azoEyl2hpW0zqlxysq2pK9HlDIHyHyakeYaYnSAwd8bow==}
+    engines: {node: '>=12'}
+
+  dotenv@17.2.2:
+    resolution: {integrity: sha512-Sf2LSQP+bOlhKWWyhFsn0UsfdK/kCWRv1iuA2gXAwt3dyNabr6QSj00I2V10pidqz69soatm9ZwZvpQMTIOd5Q==}
     engines: {node: '>=12'}
 
   dunder-proto@1.0.1:
@@ -5586,6 +5593,8 @@ snapshots:
   dotenv@16.4.7: {}
 
   dotenv@16.6.1: {}
+
+  dotenv@17.2.2: {}
 
   dunder-proto@1.0.1:
     dependencies:

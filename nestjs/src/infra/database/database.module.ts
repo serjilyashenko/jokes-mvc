@@ -15,7 +15,7 @@ export const DatabaseModule = TypeOrmModule.forRootAsync({
       password: envConfigService.databasePassword,
       database: envConfigService.databaseName,
       autoLoadEntities: true,
-      synchronize: true, // auto-create schema (disable in production!). I use true here for simplicity. In production projects migrations should be used
+      synchronize: false,
     };
   },
 });
