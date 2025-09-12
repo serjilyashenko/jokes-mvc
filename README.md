@@ -1,85 +1,35 @@
 # 🤡 JokesMVC: NestJS
 
-- MVC architecture
-- Repository pattern + Dependency Inversion
-- ApiDTOs and ViewDTOs
+A playground for MVC pattern in different languages/frameworks. A place to see how the same idea is implemented
+differently on the stack.
 
+## Stack collection
 
-- TypeOrm
-- Automapper
-- PostgreSQL
-- Docker
+- [x] [NestJS](./nestjs/README.md) <i>(start page missing)</i>
+- [ ] Java / SpringBoot <i>(push from local machine)</i>
+- [ ] Go <i>(push from local machine)</i>
+- [ ] Go / Gin <i>(push from local machine)</i>
+- [ ] PHP <i>(push from local machine)</i>
+- [ ] PHP / Laravel <i>(push from local machine)</i>
+- [ ] PHP / Symphony <i>(push from local machine)</i>
 
-## Run locally with docker-compose
+## Demo
 
-Copy `.env.example` to `.env` and modify it if needed:
+You'll need Docker to be able to see the app
+
 ```bash
-cp .env.example .env 
-```
-Start database Docker container:
-```bash
-docker compose up -d
+cp ./nestjs/.env.example ./nestjs/.env
+
+docker compose -f ./nestjs/docker-compose.yml up -d
 ```
 See [http://localhost:8080](http://localhost:8080) in your browser.
 
-## Dev mode
+## More to implement
 
-Copy `.env.example` to `.env` and modify it if needed:
-```bash
-cp .env.example .env 
-```
-Start database Docker container:
-```bash
-docker compose up -d db
-```
-Install dependencies:
-```bash
-corepack enable
-pnpm install
-```
-Run application locally:
-```bash
-pnpm start:dev
-```
-See [http://localhost:8080](http://localhost:8080) in your browser.\
-Or [http://localhost:8080/api](http://localhost:8080/api) for swagger api docs.
-
-> ⚠️ All docs below are from NestJS official repo.\
-> TODO: Modify it to fit JokesMVC project.
-
-
-## Description
-
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
-
-## Project setup
-
-```bash
-$ pnpm install
-```
-
-## Compile and run the project
-
-```bash
-# development
-$ pnpm run start
-
-# watch mode
-$ pnpm run start:dev
-
-# production mode
-$ pnpm run start:prod
-```
-
-## Run tests
-
-```bash
-# unit tests
-$ pnpm run test
-
-# e2e tests
-$ pnpm run test:e2e
-
-# test coverage
-$ pnpm run test:cov
-```
+- [ ] Python / Fastapi
+- [ ] Python / Jango
+- [ ] Angular
+- [ ] Ember
+- [ ] React Server Components
+- [ ] HTMX
+- [ ] Backbone
