@@ -2,7 +2,7 @@ import { plainToInstance } from 'class-transformer';
 import { validateSync } from 'class-validator';
 import { EnvConfigDto } from './dto/env-config.dto';
 
-export function validate(config: Record<string, unknown>) {
+export function validateEnvConfig(config: Record<string, unknown>) {
   const validatedConfig = plainToInstance(EnvConfigDto, config, {
     enableImplicitConversion: true,
   });
