@@ -1,6 +1,6 @@
 # 🤡 JokesMVC: NestJS
 
-This is a part of JokesMVC monorepo. Check the root project. 
+This is a part of JokesMVC monorepo. Check the [root](./README.md) project. 
 
 ## Run locally with docker-compose
 
@@ -8,11 +8,11 @@ Copy `.env.example` to `.env` and modify it if needed:
 ```bash
 cp .env.example .env 
 ```
-Start database Docker container:
+Start Docker containers:
 ```bash
 docker compose up -d
 ```
-See [http://localhost:8080](http://localhost:8080) in your browser.
+See [http://localhost:8080/jokes](http://localhost:8080/jokes) in your browser.
 
 ## Dev mode
 
@@ -45,9 +45,9 @@ Generate new migration
 typeorm-ts-node-commonjs migration:generate -d ./src/data-soruce.ts ./src/migrations/<migration_name>
 ```
 
-## Notees
+## Notes
 
-- SSR Vies + API
+- SSR Views + API
 - MVC architecture
 - Repository pattern + Dependency Inversion
 - ApiDTOs and ViewDTOs
@@ -58,7 +58,7 @@ typeorm-ts-node-commonjs migration:generate -d ./src/data-soruce.ts ./src/migrat
 - Docker (2 modes: local server + docker DB; all in docker)
 
 
-> ⚠️ All docs below are from NestJS official repo.\
+> ⚠️ All info below are from NestJS official repo.\
 > TODO: Modify it to fit JokesMVC project.
 
 
