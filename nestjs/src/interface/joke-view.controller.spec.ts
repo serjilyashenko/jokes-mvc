@@ -8,7 +8,20 @@ describe('JokeController', () => {
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
       controllers: [JokeViewController],
-      providers: [JokeService],
+      providers: [
+        {
+          provide: JokeService,
+          useValue: {
+            create: jest.fn(),
+            getCreateViewDto: jest.fn(),
+            findAllApiDto: jest.fn(),
+            findAllViewDto: jest.fn(),
+            findOne: jest.fn(),
+            update: jest.fn(),
+            remove: jest.fn(),
+          },
+        },
+      ],
     }).compile();
 
     controller = module.get<JokeViewController>(JokeViewController);
