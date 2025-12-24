@@ -17,6 +17,10 @@ describe('GreetingController (e2e)', () => {
     await app.init();
   });
 
+  afterAll(async () => {
+    await app.close();
+  });
+
   it('/greeting?name=Bob should render greeting page', () => {
     return request(app.getHttpServer())
       .get('/greeting?name=Bob')
@@ -24,9 +28,5 @@ describe('GreetingController (e2e)', () => {
       .expect((res) => {
         expect(res.text).toContain('Hello, Bob!');
       });
-  });
-
-  afterAll(async () => {
-    await app.close();
   });
 });
