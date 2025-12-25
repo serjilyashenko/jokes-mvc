@@ -1,4 +1,4 @@
-# 🤡 JokesMVC: NestJS
+# 🤡 JokesMVC
 
 A playground for MVC pattern in different languages/frameworks. A place to see how the same idea is implemented
 differently on the stack.
