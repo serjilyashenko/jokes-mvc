@@ -23,9 +23,9 @@ describe('AuthController (e2e)', () => {
     const endpoints = ['/auth/token/register', '/auth/session/register'];
 
     it.each([
-      ['valid username', 'validUser'],
+      ['validUser', 'validUser'],
       ['validUser123', 'validUser123'],
-    ])('should return 201 for valid username', async (_, username) => {
+    ])('should return 201 for valid %s', async (_, username) => {
       await Promise.all(
         endpoints.map((endpoint) =>
           request(app.getHttpServer())

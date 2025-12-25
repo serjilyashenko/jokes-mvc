@@ -1,7 +1,7 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { IsNotEmpty, Length, Matches, MinLength } from 'class-validator';
 
-export class RegisterDto {
+export class RegisterInputDto {
   @ApiProperty()
   @MinLength(3)
   @IsNotEmpty()
