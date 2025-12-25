@@ -2,6 +2,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 import request from 'supertest';
 import { NestExpressApplication } from '@nestjs/platform-express';
 import { GreetingModule } from '../src/domain/greeting/greeting.module';
+import { setupApp } from '../src/setupApp';
 
 describe('GreetingController (e2e)', () => {
   let app: NestExpressApplication;
@@ -12,8 +13,7 @@ describe('GreetingController (e2e)', () => {
     }).compile();
 
     app = moduleFixture.createNestApplication<NestExpressApplication>();
-    app.setBaseViewsDir('views');
-    app.setViewEngine('hbs');
+    setupApp(app);
     await app.init();
   });
 

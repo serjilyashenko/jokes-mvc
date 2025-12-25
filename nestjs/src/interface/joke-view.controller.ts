@@ -30,7 +30,6 @@ export class JokeViewController {
   }
 
   @Post('new')
-  @UsePipes(new ValidationPipe({ whitelist: true }))
   @Redirect('/jokes', HttpStatus.SEE_OTHER)
   async create(@Body() createJokeDto: CreateJokeDto) {
     await this.jokeService.create(createJokeDto);

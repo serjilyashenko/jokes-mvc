@@ -2,6 +2,7 @@ import request from 'supertest';
 import { Test, TestingModule } from '@nestjs/testing';
 import { NestExpressApplication } from '@nestjs/platform-express';
 import { AuthModule } from '../src/domain/auth/auth.module';
+import { setupApp } from '../src/setupApp';
 
 describe('AuthController (e2e)', () => {
   let app: NestExpressApplication;
@@ -12,6 +13,7 @@ describe('AuthController (e2e)', () => {
     }).compile();
 
     app = moduleFixture.createNestApplication<NestExpressApplication>();
+    setupApp(app);
     await app.init();
   });
 

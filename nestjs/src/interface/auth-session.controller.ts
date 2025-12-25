@@ -7,8 +7,6 @@ import {
   Req,
   Res,
   UnauthorizedException,
-  UsePipes,
-  ValidationPipe,
 } from '@nestjs/common';
 import { RegisterInputDto } from '../domain/auth/dto/register-input.dto';
 import { CredentialsInputDto } from '../domain/auth/dto/credentials-input.dto';
@@ -21,7 +19,6 @@ export class AuthSessionController {
 
   @Post('login')
   @HttpCode(HttpStatus.OK)
-  @UsePipes(new ValidationPipe({ whitelist: true }))
   login(
     @Body() credentialsDto: CredentialsInputDto,
     @Res({ passthrough: true }) response: Response,
@@ -36,7 +33,6 @@ export class AuthSessionController {
 
   @Post('refresh')
   @HttpCode(HttpStatus.OK)
-  @UsePipes(new ValidationPipe({ whitelist: true }))
   refresh(
     @Req() request: Request,
     @Res({ passthrough: true }) response: Response,
@@ -52,7 +48,6 @@ export class AuthSessionController {
 
   @Post('logout')
   @HttpCode(HttpStatus.NO_CONTENT)
-  @UsePipes(new ValidationPipe({ whitelist: true }))
   logout(
     @Req() request: Request,
     @Res({ passthrough: true }) response: Response,
@@ -64,7 +59,6 @@ export class AuthSessionController {
 
   @Post('register')
   @HttpCode(HttpStatus.CREATED)
-  @UsePipes(new ValidationPipe({ whitelist: true }))
   register(
     @Body() registerInputDto: RegisterInputDto,
     @Res({ passthrough: true }) response: Response,

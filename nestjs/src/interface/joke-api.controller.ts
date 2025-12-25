@@ -9,8 +9,6 @@ import {
   Param,
   Patch,
   Post,
-  UsePipes,
-  ValidationPipe,
 } from '@nestjs/common';
 import { JokeService } from '../domain/joke/joke.service';
 import { JokeApiDto } from '../domain/joke/dto/joke-api.dto';
@@ -25,7 +23,6 @@ export class JokeApiController {
 
   @Post()
   @ApiOkResponse({ type: JokeApiDto })
-  @UsePipes(new ValidationPipe({ whitelist: true }))
   async create(@Body() createJokeDto: CreateJokeDto): Promise<JokeApiDto> {
     return await this.jokeService.create(createJokeDto);
   }
@@ -48,7 +45,6 @@ export class JokeApiController {
 
   @Patch(':id')
   @ApiOkResponse({ type: JokeApiDto })
-  @UsePipes(new ValidationPipe({ whitelist: true }))
   async update(
     @Param('id', ValidateIntPipe) id: string,
     @Body() updateJokeDto: UpdateJokeDto,

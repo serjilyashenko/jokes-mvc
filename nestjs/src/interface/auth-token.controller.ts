@@ -5,8 +5,6 @@ import {
   HttpStatus,
   Post,
   UnauthorizedException,
-  UsePipes,
-  ValidationPipe,
 } from '@nestjs/common';
 import { RegisterInputDto } from '../domain/auth/dto/register-input.dto';
 import { AuthService } from '../domain/auth/auth.service';
@@ -22,7 +20,6 @@ export class AuthTokenController {
   @Post()
   @HttpCode(HttpStatus.OK)
   @ApiOkResponse({ type: TokenDto })
-  @UsePipes(new ValidationPipe({ whitelist: true }))
   login(@Body() credentialsInputDto: CredentialsInputDto): TokenDto {
     const tokenDto = this.authService.login(credentialsInputDto);
     if (!tokenDto) {
@@ -32,7 +29,6 @@ export class AuthTokenController {
   }
 
   @Post('refresh')
-  @UsePipes(new ValidationPipe({ whitelist: true }))
   refresh(@Body() refreshTokenDto: RefreshTokenInputDto): TokenDto {
     const tokenDto = this.authService.refresh(refreshTokenDto.refreshToken);
     if (!tokenDto) {
@@ -43,7 +39,6 @@ export class AuthTokenController {
 
   @Post('revoke')
   @HttpCode(HttpStatus.NO_CONTENT)
-  @UsePipes(new ValidationPipe({ whitelist: true }))
   revoke(@Body() refreshTokenInputDto: RefreshTokenInputDto): void {
     return this.authService.revoke(refreshTokenInputDto.refreshToken);
   }
@@ -51,7 +46,6 @@ export class AuthTokenController {
   @Post('register')
   @HttpCode(HttpStatus.CREATED)
   @ApiOkResponse({ type: TokenDto })
-  @UsePipes(new ValidationPipe({ whitelist: true }))
   register(@Body() registerInputDto: RegisterInputDto): TokenDto {
     return this.authService.register(registerInputDto);
   }
