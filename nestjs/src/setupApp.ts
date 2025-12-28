@@ -1,5 +1,6 @@
 import { NestExpressApplication } from '@nestjs/platform-express';
 import morgan from 'morgan';
+import cookieParser from 'cookie-parser';
 import { ValidationPipe } from '@nestjs/common';
 import { join } from 'path';
 import hbs from 'hbs';
@@ -17,6 +18,8 @@ export function setupApp(
   options: SetupAppOptions = {},
 ) {
   app.useGlobalPipes(new ValidationPipe({ whitelist: true, transform: true }));
+
+  app.use(cookieParser());
 
   app.useStaticAssets(join(ROOT_DIR, 'public'));
   app.setBaseViewsDir(join(ROOT_DIR, 'views'));

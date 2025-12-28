@@ -6,8 +6,6 @@ import {
   Param,
   Delete,
   Render,
-  ValidationPipe,
-  UsePipes,
   Redirect,
   HttpStatus,
 } from '@nestjs/common';
