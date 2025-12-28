@@ -3,7 +3,7 @@ import morgan from 'morgan';
 import cookieParser from 'cookie-parser';
 import { ValidationPipe } from '@nestjs/common';
 import { join } from 'path';
-import hbs from 'hbs';
+import { engine } from 'express-handlebars';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 
 export const ROOT_DIR = process.cwd();
@@ -22,9 +22,9 @@ export function setupApp(
   app.use(cookieParser());
 
   app.useStaticAssets(join(ROOT_DIR, 'public'));
-  app.setBaseViewsDir(join(ROOT_DIR, 'views'));
-  app.setViewEngine('hbs');
-  hbs.registerPartials(join(ROOT_DIR, 'views/partials')); // rebuild app to apply changes in partials
+  app.engine('handlebars', engine());
+  app.set('view engine', 'handlebars');
+  app.set('views', join(ROOT_DIR, 'views'));
 
   if (options?.morgan) {
     app.use(morgan('dev'));
