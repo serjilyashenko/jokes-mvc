@@ -3,6 +3,7 @@ import { EnvConfigModule } from '../env-config/env-config.module';
 import { EnvConfigService } from '../env-config/env-config.service';
 import { Module } from '@nestjs/common';
 import { JwtAuthService } from './jwt-auth.service';
+import { JwtAuthGuard } from './guards/jwt-auth-guard.service';
 
 @Module({
   imports: [
@@ -16,7 +17,7 @@ import { JwtAuthService } from './jwt-auth.service';
       }),
     }),
   ],
-  providers: [JwtAuthService],
-  exports: [JwtAuthService],
+  providers: [JwtAuthService, JwtAuthGuard],
+  exports: [JwtAuthService, JwtAuthGuard],
 })
 export class JwtAuthModule {}

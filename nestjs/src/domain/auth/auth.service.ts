@@ -4,6 +4,7 @@ import { TokenMapper } from './mappers/token.mapper';
 import { TokenDto } from './dto/token.dto';
 import { RegisterInputDto } from './dto/register-input.dto';
 import { JwtAuthService } from '../../infra/jwt-auth/jwt-auth.service';
+import { AuthIdentity } from '../../infra/jwt-auth/types/auth-identity.type';
 
 @Injectable()
 export class AuthService {
@@ -16,7 +17,10 @@ export class AuthService {
     credentialsDto: CredentialsInputDto,
   ): Promise<TokenDto | null> {
     // TODO: implement actual authentication logic and refresh token generation
-    const payload = { sub: 'test_sub', username: credentialsDto.username };
+    const payload: AuthIdentity = {
+      sub: 'test_sub',
+      username: credentialsDto.username,
+    };
     const accessToken: string = await this.jwtAuthService.sign(payload);
     return this.tokenMapper.toTokenDto(accessToken, 'jwt-refresh-token');
   }
