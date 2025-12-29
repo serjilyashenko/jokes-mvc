@@ -3,15 +3,22 @@ import { CredentialsInputDto } from './dto/credentials-input.dto';
 import { TokenMapper } from './mappers/token.mapper';
 import { TokenDto } from './dto/token.dto';
 import { RegisterInputDto } from './dto/register-input.dto';
+import { JwtAuthService } from '../../infra/jwt-auth/jwt-auth.service';
 
 @Injectable()
 export class AuthService {
-  constructor(private readonly tokenMapper: TokenMapper) {}
+  constructor(
+    private readonly tokenMapper: TokenMapper,
+    private readonly jwtAuthService: JwtAuthService,
+  ) {}
 
-  public login(credentialsDto: CredentialsInputDto): TokenDto | null {
-    // TODO: implement actual authentication logic
-    console.log('>>> AuthService.login ', credentialsDto);
-    return this.tokenMapper.toTokenDto('jwt-access-token', 'jwt-refresh-token');
+  public async login(
+    credentialsDto: CredentialsInputDto,
+  ): Promise<TokenDto | null> {
+    // TODO: implement actual authentication logic and refresh token generation
+    const payload = { sub: 'test_sub', username: credentialsDto.username };
+    const accessToken: string = await this.jwtAuthService.sign(payload);
+    return this.tokenMapper.toTokenDto(accessToken, 'jwt-refresh-token');
   }
 
   public refresh(refreshToken: string): TokenDto | null {

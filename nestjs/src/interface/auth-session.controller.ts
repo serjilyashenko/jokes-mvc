@@ -28,11 +28,11 @@ export class AuthSessionController {
 
   @Post('login')
   @HttpCode(HttpStatus.OK)
-  public login(
+  public async login(
     @Body() credentialsDto: CredentialsInputDto,
     @Res({ passthrough: true }) response: Response,
-  ): SessionDto {
-    const tokenDto = this.authService.login(credentialsDto);
+  ): Promise<SessionDto> {
+    const tokenDto = await this.authService.login(credentialsDto);
     if (!tokenDto) {
       throw new UnauthorizedException('Invalid credentials');
     }

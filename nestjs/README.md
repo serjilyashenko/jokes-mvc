@@ -8,6 +8,11 @@ Copy `.env.example` to `.env` and modify it if needed:
 ```bash
 cp .env.example .env 
 ```
+Generate secrets and put them into `.env`:
+```bash
+sed -i '' "s/secret_64/$(openssl rand -hex 64)/" .env   # macOS
+sed -i "s/secret_64/$(openssl rand -hex 64)/" .env      # Linux
+```
 Start Docker containers:
 ```bash
 docker compose up -d
@@ -19,6 +24,11 @@ See [http://localhost:8080/jokes](http://localhost:8080/jokes) in your browser.
 Copy `.env.example` to `.env` and modify it if needed:
 ```bash
 cp .env.example .env 
+```
+Generate secrets and put them into `.env`:
+```bash
+sed -i '' "s/secret_64/$(openssl rand -hex 64)/" .env   # macOS
+sed -i "s/secret_64/$(openssl rand -hex 64)/" .env      # Linux
 ```
 Start database Docker container:
 ```bash

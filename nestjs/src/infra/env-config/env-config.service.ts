@@ -29,4 +29,12 @@ export class EnvConfigService {
   get databasePassword(): string {
     return this.configService.get('DATABASE_PASSWORD');
   }
+
+  get jwtSecret(): string {
+    return this.configService.get('JWT_SECRET');
+  }
+
+  get jwtExpirationTime(): number {
+    return this.configService.get('JWT_EXPIRATION');
+  }
 }

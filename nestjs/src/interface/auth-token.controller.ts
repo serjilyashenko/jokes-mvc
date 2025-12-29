@@ -20,8 +20,10 @@ export class AuthTokenController {
   @Post()
   @HttpCode(HttpStatus.OK)
   @ApiOkResponse({ type: TokenDto })
-  login(@Body() credentialsInputDto: CredentialsInputDto): TokenDto {
-    const tokenDto = this.authService.login(credentialsInputDto);
+  async login(
+    @Body() credentialsInputDto: CredentialsInputDto,
+  ): Promise<TokenDto> {
+    const tokenDto = await this.authService.login(credentialsInputDto);
     if (!tokenDto) {
       throw new UnauthorizedException('Invalid credentials');
     }

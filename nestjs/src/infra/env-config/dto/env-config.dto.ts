@@ -1,4 +1,4 @@
-import { IsEnum, IsString } from 'class-validator';
+import { IsEnum, IsNumber, IsString } from 'class-validator';
 
 export enum Environment {
   Development = 'development',
@@ -20,4 +20,10 @@ export class EnvConfigDto {
 
   @IsString()
   DATABASE_PASSWORD: string;
+
+  @IsString()
+  JWT_SECRET: string;
+
+  @IsNumber()
+  JWT_EXPIRATION: number;
 }
