@@ -9,10 +9,11 @@ import { ExternalJokeModule } from '../../client/external-joke/external-joke.mod
 import { IJokeRepositoryToken } from './interfaces/joke.repository.interface';
 import { JokeApiController } from '../../interface/joke-api.controller';
 import { JwtAuthModule } from '../../infra/jwt-auth/jwt-auth.module';
+import { UserEntity } from '../user/entities/user.entity';
 
 @Module({
   imports: [
-    TypeOrmModule.forFeature([JokeEntity]),
+    TypeOrmModule.forFeature([JokeEntity, UserEntity]),
     JwtAuthModule,
     ExternalJokeModule,
   ],
