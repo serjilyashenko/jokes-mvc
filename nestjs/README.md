@@ -2,7 +2,7 @@
 
 This is a part of JokesMVC monorepo. Check the [root](./README.md) project. 
 
-## Run locally with docker-compose
+## Before running
 
 Copy `.env.example` to `.env` and modify it if needed:
 ```bash
@@ -13,6 +13,11 @@ Generate secrets and put them into `.env`:
 sed -i '' "s/secret_64/$(openssl rand -hex 64)/" .env   # macOS
 sed -i "s/secret_64/$(openssl rand -hex 64)/" .env      # Linux
 ```
+
+## Run locally with docker-compose
+
+Follow steps from "Before running" section.
+
 Start Docker containers:
 ```bash
 docker compose up -d
@@ -21,15 +26,8 @@ See [http://localhost:8080/jokes](http://localhost:8080/jokes) in your browser.
 
 ## Dev mode
 
-Copy `.env.example` to `.env` and modify it if needed:
-```bash
-cp .env.example .env 
-```
-Generate secrets and put them into `.env`:
-```bash
-sed -i '' "s/secret_64/$(openssl rand -hex 64)/" .env   # macOS
-sed -i "s/secret_64/$(openssl rand -hex 64)/" .env      # Linux
-```
+Follow steps from "Before running" section.
+
 Start database Docker container:
 ```bash
 docker compose up -d db
