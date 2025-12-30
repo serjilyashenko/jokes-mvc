@@ -3,8 +3,6 @@ import {
   Get,
   Post,
   Body,
-  Param,
-  Delete,
   Render,
   Redirect,
   HttpStatus,
@@ -14,7 +12,6 @@ import { JokeService } from '../domain/joke/joke.service';
 import { CreateJokeDto } from '../domain/joke/dto/create-joke.dto';
 import { JokeViewDto } from '../domain/joke/dto/joke-view.dto';
 import { CreateJokeViewDto } from '../domain/joke/dto/create-joke-view.dto';
-import { ValidateIntPipe } from './pipes/ValidateIntPipe';
 
 @Controller('jokes')
 @ApiExcludeController()
@@ -30,7 +27,9 @@ export class JokeViewController {
   @Post('new')
   @Redirect('/jokes', HttpStatus.SEE_OTHER)
   async create(@Body() createJokeDto: CreateJokeDto) {
-    await this.jokeService.create(createJokeDto);
+    // TODO: Replace with actual Cookie Identity Decorator
+    const userId = 'test_sub';
+    await this.jokeService.create(userId, createJokeDto);
     return;
   }
 
@@ -39,10 +38,5 @@ export class JokeViewController {
   async showAllView(): Promise<{ jokes: Array<JokeViewDto> }> {
     const jokeDtoList = await this.jokeService.findAllViewDto();
     return { jokes: jokeDtoList };
-  }
-
-  @Delete(':id')
-  remove(@Param('id', ValidateIntPipe) id: string) {
-    return this.jokeService.remove(id);
   }
 }

@@ -8,9 +8,14 @@ import { JokeMapper } from './mappers/joke.mapper';
 import { ExternalJokeModule } from '../../client/external-joke/external-joke.module';
 import { IJokeRepositoryToken } from './interfaces/joke.repository.interface';
 import { JokeApiController } from '../../interface/joke-api.controller';
+import { JwtAuthModule } from '../../infra/jwt-auth/jwt-auth.module';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([JokeEntity]), ExternalJokeModule],
+  imports: [
+    TypeOrmModule.forFeature([JokeEntity]),
+    JwtAuthModule,
+    ExternalJokeModule,
+  ],
   controllers: [JokeViewController, JokeApiController],
   providers: [
     JokeService,

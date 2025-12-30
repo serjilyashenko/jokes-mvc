@@ -16,27 +16,37 @@ import { UpdateJokeDto } from '../domain/joke/dto/update-joke.dto';
 import { CreateJokeDto } from '../domain/joke/dto/create-joke.dto';
 import { ValidateIntPipe } from './pipes/ValidateIntPipe';
 import { ApiNoContentResponse, ApiOkResponse } from '@nestjs/swagger';
+import { JwtAuth } from '../infra/jwt-auth/decorators/jwt-auth.decorator';
+import { JwtIdentity } from '../infra/jwt-auth/decorators/jwt-identity.decorator';
+import { AuthIdentity } from '../infra/jwt-auth/types/auth-identity.type';
 
 @Controller('api/jokes')
+@JwtAuth()
 export class JokeApiController {
   constructor(private readonly jokeService: JokeService) {}
 
   @Post()
   @ApiOkResponse({ type: JokeApiDto })
-  async create(@Body() createJokeDto: CreateJokeDto): Promise<JokeApiDto> {
-    return await this.jokeService.create(createJokeDto);
+  async create(
+    @JwtIdentity() identity: AuthIdentity,
+    @Body() createJokeDto: CreateJokeDto,
+  ): Promise<JokeApiDto> {
+    return await this.jokeService.create(identity.sub, createJokeDto);
   }
 
   @Get()
   @ApiOkResponse({ type: JokeApiDto, isArray: true })
-  async findAll(): Promise<JokeApiDto[]> {
-    return await this.jokeService.findAllApiDto();
+  async findAll(@JwtIdentity() identity: AuthIdentity): Promise<JokeApiDto[]> {
+    return await this.jokeService.findAllApiDto(identity.sub);
   }
 
   @Get(':id')
   @ApiOkResponse({ type: JokeApiDto })
-  async findOne(@Param('id', ValidateIntPipe) id: string): Promise<JokeApiDto> {
-    const jokeApiDto = await this.jokeService.findOne(id);
+  async findOne(
+    @Param('id', ValidateIntPipe) jokeId: string,
+    @JwtIdentity() identity: AuthIdentity,
+  ): Promise<JokeApiDto> {
+    const jokeApiDto = await this.jokeService.findOne(identity.sub, jokeId);
     if (!jokeApiDto) {
       throw new NotFoundException();
     }
@@ -46,10 +56,15 @@ export class JokeApiController {
   @Patch(':id')
   @ApiOkResponse({ type: JokeApiDto })
   async update(
-    @Param('id', ValidateIntPipe) id: string,
+    @Param('id', ValidateIntPipe) jokeId: string,
+    @JwtIdentity() identity: AuthIdentity,
     @Body() updateJokeDto: UpdateJokeDto,
   ): Promise<JokeApiDto> {
-    const jokeApiDto = await this.jokeService.update(id, updateJokeDto);
+    const jokeApiDto = await this.jokeService.update(
+      identity.sub,
+      jokeId,
+      updateJokeDto,
+    );
     if (!jokeApiDto) {
       throw new NotFoundException();
     }
@@ -59,7 +74,10 @@ export class JokeApiController {
   @Delete(':id')
   @HttpCode(HttpStatus.NO_CONTENT)
   @ApiNoContentResponse()
-  remove(@Param('id', ValidateIntPipe) id: string) {
-    return this.jokeService.remove(id);
+  remove(
+    @Param('id', ValidateIntPipe) jokeId: string,
+    @JwtIdentity() identity: AuthIdentity,
+  ) {
+    return this.jokeService.remove(identity.sub, jokeId);
   }
 }

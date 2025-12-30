@@ -25,7 +25,11 @@ export class JokeService {
     private readonly jokeMapper: JokeMapper,
   ) {}
 
-  async create(createJokeDto: CreateJokeDto): Promise<JokeEntity> {
+  async create(
+    _userId: string,
+    createJokeDto: CreateJokeDto,
+  ): Promise<JokeEntity> {
+    // TODO: Use userId to associate joke with a user
     const jokeEntity: JokeEntity = JokeEntity.create({ ...createJokeDto });
     return await this.jokeRepository.save(jokeEntity);
   }
@@ -35,7 +39,8 @@ export class JokeService {
     return { content: externalJokeEntity?.joke || '' };
   }
 
-  async findAllApiDto(): Promise<JokeApiDto[]> {
+  async findAllApiDto(_userId: string): Promise<JokeApiDto[]> {
+    // TODO: Use userId to filter jokes
     const jokeEntities: JokeEntity[] = await this.jokeRepository.findAll();
     return this.jokeMapper.toApiDto(jokeEntities);
   }
@@ -45,8 +50,9 @@ export class JokeService {
     return this.jokeMapper.toViewDto(jokeEntities);
   }
 
-  async findOne(id: string): Promise<JokeApiDto | null> {
-    const jokeEntity = await this.jokeRepository.findById(id);
+  async findOne(_userId: string, jokeId: string): Promise<JokeApiDto | null> {
+    // TODO: Use userId to verify access to the joke
+    const jokeEntity = await this.jokeRepository.findById(jokeId);
     if (!jokeEntity) {
       return null;
     }
@@ -54,10 +60,12 @@ export class JokeService {
   }
 
   async update(
-    id: string,
+    _userId: string,
+    jokeId: string,
     updateJokeDto: UpdateJokeDto,
   ): Promise<JokeApiDto | null> {
-    const originalJokeEntity = await this.jokeRepository.findById(id);
+    // TODO: Use userId to verify access to the joke
+    const originalJokeEntity = await this.jokeRepository.findById(jokeId);
     if (!originalJokeEntity) {
       return null;
     }
@@ -67,7 +75,8 @@ export class JokeService {
     return this.jokeRepository.save(updatedJokeEntity);
   }
 
-  async remove(id: string): Promise<void> {
-    await this.jokeRepository.delete(id);
+  async remove(_userId: string, jokeId: string): Promise<void> {
+    // TODO: Use userId to verify access to the joke
+    await this.jokeRepository.delete(jokeId);
   }
 }
