@@ -23,6 +23,11 @@ Start Docker containers:
 docker compose up -d
 ```
 See [http://localhost:8080/jokes](http://localhost:8080/jokes) in your browser.
+Or [http://localhost:8080/api](http://localhost:8080/api) for swagger api docs.
+
+> Guest user\
+> login: `solidsnake`\
+> password: `lulilalyl0`
 
 ## Dev mode
 
@@ -44,14 +49,22 @@ pnpm start:dev
 See [http://localhost:8080](http://localhost:8080) in your browser.\
 Or [http://localhost:8080/api](http://localhost:8080/api) for swagger api docs.
 
+> Guest user\
+> login: `solidsnake`\
+> password: `lulilalyl0`
+
 ## Migrations
 
 > ⚠️ Migrations are run during the app start
 
 Generate new migration
 ```bash
-typeorm-ts-node-commonjs migration:generate -d ./src/data-soruce.ts ./src/migrations/<migration_name>
+npx typeorm-ts-node-commonjs migration:generate -d ./src/data-soruce.ts ./src/migrations/<migration_name>
 ```
+
+## Seed guest and test users
+
+> ⚠️ Seeding is run during the app start
 
 ## Notes
 
