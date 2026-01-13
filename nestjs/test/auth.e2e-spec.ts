@@ -1,7 +1,7 @@
 import request from 'supertest';
 import { Test, TestingModule } from '@nestjs/testing';
 import { NestExpressApplication } from '@nestjs/platform-express';
-import { AuthModule } from '../src/domain/auth/auth.module';
+import { AuthModule } from '../src/application/auth/auth.module';
 import { setupApp } from '../src/setupApp';
 
 describe('AuthController (e2e)', () => {

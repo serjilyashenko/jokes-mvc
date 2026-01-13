@@ -1,5 +1,5 @@
 import { DataSource } from 'typeorm';
-import { JokeEntity } from '../domain/joke/entities/joke.entity';
+import { JokeEntity } from '../infrastructure/reppositories/joke/entities/joke.entity';
 
 export async function seedJokes(
   dataSource: DataSource,

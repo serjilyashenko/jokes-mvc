@@ -1,7 +1,7 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import request from 'supertest';
 import { NestExpressApplication } from '@nestjs/platform-express';
-import { GreetingModule } from '../src/domain/greeting/greeting.module';
+import { GreetingModule } from '../src/application/greeting/greeting.module';
 import { setupApp } from '../src/setupApp';
 
 describe('GreetingController (e2e)', () => {

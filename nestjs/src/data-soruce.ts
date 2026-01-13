@@ -1,8 +1,8 @@
 import { DataSource } from 'typeorm';
 import dotenv from 'dotenv';
-import { DB_PORT, DB_TYPE } from './infra/database/database.const';
-import { EnvConfigDto } from './infra/env-config/dto/env-config.dto';
-import { validateEnvConfig } from './infra/env-config/env-config.validation';
+import { DB_PORT, DB_TYPE } from './infrastructure/database/database.const';
+import { EnvConfigDto } from './infrastructure/env-config/dto/env-config.dto';
+import { validateEnvConfig } from './infrastructure/env-config/env-config.validation';
 
 dotenv.config();
 

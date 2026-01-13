@@ -1,5 +1,5 @@
 import { DataSource } from 'typeorm';
-import { UserEntity } from '../domain/user/entities/user.entity';
+import { UserEntity } from '../infrastructure/reppositories/user/entities/user.entity';
 import { seedJokes } from './jokes.seed';
 
 type UserSeed = {
