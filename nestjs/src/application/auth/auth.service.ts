@@ -1,14 +1,21 @@
-import { Injectable } from '@nestjs/common';
+import { Inject, Injectable } from '@nestjs/common';
 import { CredentialsInputDto } from './dto/credentials-input.dto';
 import { TokenMapper } from './mappers/token.mapper';
 import { TokenDto } from './dto/token.dto';
 import { RegisterInputDto } from './dto/register-input.dto';
 import { JwtAuthService } from '../../infrastructure/jwt-auth/jwt-auth.service';
 import { AuthIdentity } from '../../infrastructure/jwt-auth/types/auth-identity.type';
+import { UserEntity } from '../../infrastructure/reppositories/user/entities/user.entity';
+import {
+  IUserRepository,
+  IUserRepositoryToken,
+} from '../../domain/user/user.repository.interface';
 
 @Injectable()
 export class AuthService {
   constructor(
+    @Inject(IUserRepositoryToken)
+    private readonly userRepository: IUserRepository,
     private readonly tokenMapper: TokenMapper,
     private readonly jwtAuthService: JwtAuthService,
   ) {}
@@ -37,8 +44,14 @@ export class AuthService {
     return;
   }
 
-  public register(registerInputDto: RegisterInputDto): TokenDto {
-    // TODO: implement user registration logic
+  public async register(registerInputDto: RegisterInputDto): Promise<TokenDto> {
+    const userEntity: UserEntity = UserEntity.create({
+      username: registerInputDto.username,
+      // TODO: hash with bcrypt service
+      passwordHash: 'hashed-password',
+    });
+    await this.userRepository.save(userEntity);
+    // TODO: implement actual authentication logic and refresh token generation
     console.log('>>> AuthService.register ', registerInputDto);
     return this.tokenMapper.toTokenDto('jwt-access-token', 'jwt-refresh-token');
   }

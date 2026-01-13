@@ -48,7 +48,7 @@ export class AuthTokenController {
   @Post('register')
   @HttpCode(HttpStatus.CREATED)
   @ApiOkResponse({ type: TokenDto })
-  register(@Body() registerInputDto: RegisterInputDto): TokenDto {
+  register(@Body() registerInputDto: RegisterInputDto): Promise<TokenDto> {
     return this.authService.register(registerInputDto);
   }
 }

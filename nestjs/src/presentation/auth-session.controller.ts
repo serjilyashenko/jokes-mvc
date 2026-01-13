@@ -74,12 +74,12 @@ export class AuthSessionController {
 
   @Post('register')
   @HttpCode(HttpStatus.CREATED)
-  public register(
+  public async register(
     @Body() registerInputDto: RegisterInputDto,
     @Res({ passthrough: true }) response: Response,
-  ): SessionDto {
+  ): Promise<SessionDto> {
     const { accessToken, refreshToken } =
-      this.authService.register(registerInputDto);
+      await this.authService.register(registerInputDto);
     this.setCookie(response, refreshToken);
     return { accessToken };
   }
