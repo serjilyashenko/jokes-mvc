@@ -4,3 +4,5 @@ dist
 *.md
 .git
 .idea
+.npmrc
+.env*
