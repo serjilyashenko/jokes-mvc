@@ -17,8 +17,8 @@ describe('GreetingController (e2e)', () => {
     await app.init();
   });
 
-  afterAll(async () => {
-    await app.close();
+  afterEach(async () => {
+    await app?.close();
   });
 
   it('/greeting?name=Bob should render greeting page', () => {

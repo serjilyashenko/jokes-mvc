@@ -2,6 +2,7 @@ import request from 'supertest';
 import { Test, TestingModule } from '@nestjs/testing';
 import { NestExpressApplication } from '@nestjs/platform-express';
 import { AuthModule } from '../src/application/auth/auth.module';
+import { DatabaseModule } from '../src/infrastructure/database/database.module';
 import { setupApp } from '../src/setupApp';
 
 describe('AuthController (e2e)', () => {
@@ -9,7 +10,7 @@ describe('AuthController (e2e)', () => {
 
   beforeEach(async () => {
     const moduleFixture: TestingModule = await Test.createTestingModule({
-      imports: [AuthModule],
+      imports: [DatabaseModule, AuthModule],
     }).compile();
 
     app = moduleFixture.createNestApplication<NestExpressApplication>();
@@ -17,8 +18,8 @@ describe('AuthController (e2e)', () => {
     await app.init();
   });
 
-  afterAll(async () => {
-    await app.close();
+  afterEach(async () => {
+    await app?.close();
   });
 
   describe('username validation', () => {

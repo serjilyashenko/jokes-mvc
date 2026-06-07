@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/unbound-method */
 import { Test, TestingModule } from '@nestjs/testing';
+import { type Mocked } from 'vitest';
 import { JokeService } from './joke.service';
 import {
   IJokeRepository,
@@ -12,8 +13,8 @@ import { JokeApiDto } from './dto/joke-api.dto';
 
 describe('JokeService', () => {
   let service: JokeService;
-  let mapper: jest.Mocked<JokeMapper>;
-  let repo: jest.Mocked<IJokeRepository>;
+  let mapper: Mocked<JokeMapper>;
+  let repo: Mocked<IJokeRepository>;
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
@@ -22,32 +23,32 @@ describe('JokeService', () => {
         {
           provide: IJokeRepositoryToken,
           useValue: {
-            findAll: jest.fn(),
-            findById: jest.fn(),
-            save: jest.fn(),
-            update: jest.fn(),
-            delete: jest.fn(),
+            findAll: vi.fn(),
+            findById: vi.fn(),
+            save: vi.fn(),
+            update: vi.fn(),
+            delete: vi.fn(),
           },
         },
         {
           provide: JokeMapper,
           useValue: {
-            toApiDto: jest.fn(),
-            toViewDto: jest.fn(),
+            toApiDto: vi.fn(),
+            toViewDto: vi.fn(),
           },
         },
         {
           provide: IExternalJokeServiceToken,
           useValue: {
-            getRandomJoke: jest.fn(),
+            getRandomJoke: vi.fn(),
           },
         },
       ],
     }).compile();
 
     service = module.get<JokeService>(JokeService);
-    mapper = module.get<jest.Mocked<JokeMapper>>(JokeMapper);
-    repo = module.get<jest.Mocked<IJokeRepository>>(IJokeRepositoryToken);
+    mapper = module.get<Mocked<JokeMapper>>(JokeMapper);
+    repo = module.get<Mocked<IJokeRepository>>(IJokeRepositoryToken);
   });
 
   it('should be defined', () => {
@@ -72,7 +73,7 @@ describe('JokeService', () => {
     repo.findById.mockResolvedValue(mockEntity);
     mapper.toApiDto.mockReturnValue(mockDto);
 
-    const result = await service.findOne(MOCK_ID);
+    const result = await service.findOne('user-id', MOCK_ID);
 
     expect(repo.findById).toHaveBeenCalledTimes(1);
     expect(repo.findById).toHaveBeenCalledWith(MOCK_ID);
