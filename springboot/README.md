@@ -21,6 +21,8 @@ See [http://localhost:8080/jokes](http://localhost:8080/jokes) in your browser.
 
 ## Dev mode
 
+Requires: [Java 21](https://adoptium.net/)
+
 Start database Docker container:
 ```bash
 docker compose up -d db
