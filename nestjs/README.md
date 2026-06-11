@@ -41,6 +41,8 @@ Or [http://localhost:8080/api](http://localhost:8080/api) for swagger api docs.
 
 ## Dev mode
 
+> Prerequisites: [Node.js](https://nodejs.org/) (check version in `package.json` → `engines`), [pnpm](https://pnpm.io/)
+
 Follow steps from "Before running" section.
 
 Start database Docker container:
