@@ -6,7 +6,7 @@ differently on the stack.
 ## Stack collection
 
 - [x] [NestJS](./nestjs/README.md) <i>(start page missing)</i>
-- [ ] Java / SpringBoot <i>(push from local machine)</i>
+- [ ] Java / SpringBoot <i>IN PROGRESS</i>
 - [ ] Go <i>(push from local machine)</i>
 - [ ] Go / Gin <i>(push from local machine)</i>
 - [ ] PHP <i>(push from local machine)</i>
