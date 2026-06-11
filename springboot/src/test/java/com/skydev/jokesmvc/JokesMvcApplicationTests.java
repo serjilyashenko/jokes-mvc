@@ -1,4 +1,4 @@
-package com.sky_dev.jokes_mvc;
+package com.skydev.jokesmvc;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
