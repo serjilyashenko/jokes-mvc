@@ -1,6 +1,16 @@
 # 🤡 JokesMVC: NestJS
 
-This is a part of JokesMVC monorepo. Check the [root](./README.md) project. 
+This is a part of JokesMVC monorepo. Check the [root](./README.md) project.
+
+## Stack
+
+- TypeScript
+- NestJS 11
+- Handlebars (SSR)
+- TypeORM + PostgreSQL
+- Swagger (API docs)
+- Vitest
+- pnpm
 
 ## Before running
 
