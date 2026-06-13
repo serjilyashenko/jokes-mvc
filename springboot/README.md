@@ -29,11 +29,13 @@ docker compose up -d db
 ```
 Run application:
 ```bash
-./mvnw spring-boot:run
+./mvnw clean spring-boot:run -Dspring-boot.run.profiles=dev
 ```
 See [http://localhost:8080](http://localhost:8080) in your browser.
 
 ## Migrations
+
+Migrations are disabled so far. Check `src/main/resources/application-dev.properties` for the configuration.
 
 TBD
 
