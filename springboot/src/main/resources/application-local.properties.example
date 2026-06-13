@@ -2,7 +2,4 @@ spring.datasource.url=jdbc:postgresql://localhost:5432/postgres
 spring.datasource.username=postgres
 spring.datasource.password=secret
 
-# No migrations yet. Re-enable when db/migration is added.
-spring.flyway.enabled=false
-
 logging.level.web=DEBUG
