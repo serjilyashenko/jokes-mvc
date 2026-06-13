@@ -13,11 +13,20 @@
 
   <form action="/jokes/new" th:object="${jokeForm}" method="post">
     <div>
-    <label for="content">Joke</label>
+      <div>
+        <label for="source">Source</label>
+      </div>
+      <input id="source" type="text" th:value="*{source.getValue()}" readonly disabled>
     </div>
-    <textarea id="content" th:field="*{content}" rows="4" cols="60"></textarea>
+    <div>
+      <div>
+        <label for="content">Joke</label>
+      </div>
+      <textarea id="content" th:field="*{content}" rows="4" cols="60"></textarea>
+    </div>
     <div>
       <button type="submit">Save</button>
+      <a href="/jokes/new" class="nes-btn">Another one</a>
     </div>
   </form>
 </body>
