@@ -30,7 +30,7 @@ Follow steps from "Before running" section.
 
 Start Docker containers:
 ```bash
-docker compose up -d
+docker compose up -d --build
 ```
 See [http://localhost:8080/jokes](http://localhost:8080/jokes) in your browser.
 Or [http://localhost:8080/api](http://localhost:8080/api) for swagger api docs.
