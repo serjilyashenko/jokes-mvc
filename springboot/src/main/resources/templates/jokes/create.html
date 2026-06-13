@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>New joke</title>
+</head>
+<body>
+  <nav>
+    <a href="/">Home</a> &gt; <a href="/jokes">Jokes</a> &gt; New
+  </nav>
+
+  <h1>New joke</h1>
+
+  <form action="/jokes/new" th:object="${jokeForm}" method="post">
+    <div>
+    <label for="content">Joke</label>
+    </div>
+    <textarea id="content" th:field="*{content}" rows="4" cols="60"></textarea>
+    <div>
+      <button type="submit">Save</button>
+    </div>
+  </form>
+</body>
+</html>
