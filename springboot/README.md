@@ -29,12 +29,6 @@ cp src/main/resources/application-local.properties.example src/main/resources/ap
 
 ## Run locally with docker-compose
 
-Copy `.env.example` to `.env` and modify it if needed:
-
-```bash
-cp .env.example .env
-```
-
 Start Docker containers:
 
 ```bash
@@ -45,13 +39,6 @@ See [http://localhost:8080/jokes](http://localhost:8080/jokes) in your browser.
 ## Dev mode
 
 Requires: [Java 21](https://adoptium.net/)
-
-Copy ENVs and modify it if needed:
-
-```bash
-cp .env.example .env && \
-cp src/main/resources/application-local.properties.example src/main/resources/application-local.properties
-```
 
 Start database Docker container:
 
