@@ -11,6 +11,15 @@
 
   <h1>New joke</h1>
 
+  <div>
+    Joke from
+    <a th:href="@{/jokes/new(source=${T(com.skydev.jokesmvc.joke.JokeSource).OPENAI})}">openai</a>
+    or
+    <a th:href="@{/jokes/new(source=${T(com.skydev.jokesmvc.joke.JokeSource).ICANHAZDADJOKE})}">icanhazdadjoke</a>
+  </div>
+
+  <br/>
+
   <form action="/jokes/new" th:object="${jokeForm}" method="post">
     <div>
       <div>
@@ -26,7 +35,7 @@
     </div>
     <div>
       <button type="submit">Save</button>
-      <a href="/jokes/new" class="nes-btn">Another one</a>
+      <a th:href="@{/jokes/new(source=*{source})}" class="nes-btn">Another one</a>
     </div>
   </form>
 </body>

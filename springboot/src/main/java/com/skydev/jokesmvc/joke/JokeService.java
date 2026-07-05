@@ -5,7 +5,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class JokeService {
 
-	public JokeForm newJokeForm() {
-		return new JokeForm(JokeSource.OPENAI, "lorem ipsum dolor sit amet");
+	public JokeForm newJokeForm(JokeSource source) {
+		return new JokeForm(source, "lorem ipsum dolor sit amet");
 	}
 }

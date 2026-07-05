@@ -1,12 +1,18 @@
 package com.skydev.jokesmvc.joke;
 
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.webmvc.test.autoconfigure.WebMvcTest;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
+
+import java.util.stream.Stream;
 
 import static org.hamcrest.Matchers.containsString;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
@@ -23,18 +29,32 @@ class JokeControllerTest {
 	@MockitoBean
 	private JokeService jokeService;
 
-	@Test
-	void createForm_returnsCreatePageWithJokeForm() throws Exception {
-		JokeForm jokeForm = new JokeForm(JokeSource.OPENAI, "Why did the chicken cross the road?");
+	@ParameterizedTest(name = "GET /jokes/new?source={0}")
+	@MethodSource("createFormScenarios")
+	void createForm_returnsCreatePageWithJokeForm(String sourceParam, JokeForm jokeForm) throws Exception {
+		when(jokeService.newJokeForm(jokeForm.source())).thenReturn(jokeForm);
 
-		when(jokeService.newJokeForm()).thenReturn(jokeForm);
+		MockHttpServletRequestBuilder request = get("/jokes/new");
+		if (sourceParam != null) {
+			request = request.param("source", sourceParam);
+		}
 
-		mockMvc.perform(get("/jokes/new"))
+		mockMvc.perform(request)
 				.andExpect(status().isOk())
 				.andExpect(view().name("jokes/create"))
 				.andExpect(model().attribute("jokeForm", jokeForm))
-				.andExpect(content().string(containsString("Why did the chicken cross the road?")))
-				.andExpect(content().string(containsString("openai")))
+				.andExpect(content().string(containsString(jokeForm.content())))
+				.andExpect(content().string(containsString(jokeForm.source().getValue())))
 				.andExpect(content().string(containsString("readonly")));
+
+		verify(jokeService).newJokeForm(jokeForm.source());
+	}
+
+	private static Stream<Arguments> createFormScenarios() {
+		return Stream.of(
+				Arguments.of(null, new JokeForm(JokeSource.OPENAI, "Why did the chicken cross the road?")),
+				Arguments.of("OPENAI", new JokeForm(JokeSource.OPENAI, "Why did the chicken cross the road?")),
+				Arguments.of("ICANHAZDADJOKE", new JokeForm(JokeSource.ICANHAZDADJOKE, "What do you call a fake noodle? An impasta."))
+		);
 	}
 }
