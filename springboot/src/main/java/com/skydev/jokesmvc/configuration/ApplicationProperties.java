@@ -1,4 +1,4 @@
-package com.skydev.jokesmvc.config;
+package com.skydev.jokesmvc.configuration;
 
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
@@ -9,13 +9,13 @@ import org.springframework.validation.annotation.Validated;
 
 @ConfigurationProperties(prefix = "jokes-mvc")
 @Validated
-public record JokesMvcProperties(
-    @Valid @NotNull OpenAi openai, @Valid @NotNull ICanHazDadJoke icanhazdadjoke) {
+public record ApplicationProperties(
+    @Valid @NotNull OpenAi openai, @Valid @NotNull Icanhazdadjoke icanhazdadjoke) {
 
   @Validated
   public record OpenAi(
       @NotBlank String apiKey, @NotBlank String url, @DefaultValue("gpt-4o-mini") String model) {}
 
   @Validated
-  public record ICanHazDadJoke(@NotBlank String url) {}
+  public record Icanhazdadjoke(@NotBlank String url) {}
 }

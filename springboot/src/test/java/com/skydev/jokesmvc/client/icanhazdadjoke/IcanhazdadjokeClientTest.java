@@ -1,17 +1,17 @@
 package com.skydev.jokesmvc.client.icanhazdadjoke;
 
-import com.skydev.jokesmvc.config.JokesMvcProperties;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-import org.springframework.http.MediaType;
-import org.springframework.test.web.client.MockRestServiceServer;
-import org.springframework.web.client.RestClient;
-
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.springframework.test.web.client.match.MockRestRequestMatchers.header;
 import static org.springframework.test.web.client.match.MockRestRequestMatchers.requestTo;
 import static org.springframework.test.web.client.response.MockRestResponseCreators.withSuccess;
+
+import com.skydev.jokesmvc.configuration.ApplicationProperties;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.springframework.http.MediaType;
+import org.springframework.test.web.client.MockRestServiceServer;
+import org.springframework.web.client.RestClient;
 
 class IcanhazdadjokeClientTest {
 
@@ -23,10 +23,11 @@ class IcanhazdadjokeClientTest {
   void setUp() {
     RestClient.Builder builder = RestClient.builder();
     server = MockRestServiceServer.bindTo(builder).build();
-    JokesMvcProperties properties =
-        new JokesMvcProperties(
-            new JokesMvcProperties.OpenAi("test-key", "https://api.openai.com/v1", "gpt-4o-mini"),
-            new JokesMvcProperties.ICanHazDadJoke("https://icanhazdadjoke.com"));
+    ApplicationProperties properties =
+        new ApplicationProperties(
+            new ApplicationProperties.OpenAi(
+                "test-key", "https://api.openai.com/v1", "gpt-4o-mini"),
+            new ApplicationProperties.Icanhazdadjoke("https://icanhazdadjoke.com"));
     client = new IcanhazdadjokeClient(builder, properties);
   }
 

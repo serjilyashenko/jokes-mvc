@@ -1,7 +1,7 @@
 package com.skydev.jokesmvc.client.icanhazdadjoke;
 
 import com.skydev.jokesmvc.client.icanhazdadjoke.dto.IcanhazdadjokeResponse;
-import com.skydev.jokesmvc.config.JokesMvcProperties;
+import com.skydev.jokesmvc.configuration.ApplicationProperties;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
@@ -15,10 +15,10 @@ public class IcanhazdadjokeClient {
   private final RestClient restClient;
 
   public IcanhazdadjokeClient(
-      RestClient.Builder restClientBuilder, JokesMvcProperties jokesMvcProperties) {
+      RestClient.Builder restClientBuilder, ApplicationProperties applicationProperties) {
     this.restClient =
         restClientBuilder
-            .baseUrl(jokesMvcProperties.icanhazdadjoke().url())
+            .baseUrl(applicationProperties.icanhazdadjoke().url())
             .defaultHeader("Accept", MediaType.APPLICATION_JSON_VALUE)
             .build();
   }
