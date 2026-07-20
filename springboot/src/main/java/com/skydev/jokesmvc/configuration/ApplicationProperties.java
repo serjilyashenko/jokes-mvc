@@ -10,10 +10,10 @@ import org.springframework.validation.annotation.Validated;
 @ConfigurationProperties(prefix = "jokes-mvc")
 @Validated
 public record ApplicationProperties(
-    @Valid @NotNull OpenAi openai, @Valid @NotNull Icanhazdadjoke icanhazdadjoke) {
+    @Valid @NotNull Openai openai, @Valid @NotNull Icanhazdadjoke icanhazdadjoke) {
 
   @Validated
-  public record OpenAi(
+  public record Openai(
       @NotBlank String apiKey, @NotBlank String url, @DefaultValue("gpt-4o-mini") String model) {}
 
   @Validated

@@ -25,7 +25,7 @@ class IcanhazdadjokeClientTest {
     server = MockRestServiceServer.bindTo(builder).build();
     ApplicationProperties properties =
         new ApplicationProperties(
-            new ApplicationProperties.OpenAi(
+            new ApplicationProperties.Openai(
                 "test-key", "https://api.openai.com/v1", "gpt-4o-mini"),
             new ApplicationProperties.Icanhazdadjoke("https://icanhazdadjoke.com"));
     client = new IcanhazdadjokeClient(builder, properties);

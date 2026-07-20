@@ -20,7 +20,14 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
 
-@WebMvcTest(JokeController.class)
+@WebMvcTest(
+		controllers = JokeController.class,
+		properties = {
+				"jokes-mvc.openai.api-key=test",
+				"jokes-mvc.openai.url=https://example.com",
+				"jokes-mvc.icanhazdadjoke.url=https://example.com"
+		}
+)
 class JokeControllerTest {
 
 	@Autowired
