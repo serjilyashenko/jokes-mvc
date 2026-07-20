@@ -1,6 +1,7 @@
 package com.skydev.jokesmvc.joke;
 
 import com.skydev.jokesmvc.client.icanhazdadjoke.IcanhazdadjokeClient;
+import com.skydev.jokesmvc.client.openai.OpenaiClient;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -8,15 +9,14 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class JokeService {
 
-  private static final String OPENAI_PLACEHOLDER = "lorem ipsum dolor sit amet";
-
   private final IcanhazdadjokeClient icanhazdadjokeClient;
+  private final OpenaiClient openaiClient;
 
   public JokeForm newJokeForm(JokeSource source) {
     String content =
         switch (source) {
           case ICANHAZDADJOKE -> icanhazdadjokeClient.getJoke();
-          case OPENAI -> OPENAI_PLACEHOLDER;
+          case OPENAI -> openaiClient.getJoke();
         };
     return new JokeForm(source, content);
   }
