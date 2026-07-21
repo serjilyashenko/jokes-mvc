@@ -4,7 +4,6 @@ import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.boot.context.properties.bind.DefaultValue;
 import org.springframework.validation.annotation.Validated;
 
 @ConfigurationProperties(prefix = "jokes-mvc")
@@ -14,7 +13,10 @@ public record ApplicationProperties(
 
   @Validated
   public record Openai(
-      @NotBlank String apiKey, @NotBlank String url, @DefaultValue("gpt-4o-mini") String model) {}
+      @NotBlank String apiKey,
+      @NotBlank String url,
+      @NotBlank String model,
+      @NotBlank String prompt) {}
 
   @Validated
   public record Icanhazdadjoke(@NotBlank String url) {}

@@ -1,16 +1,5 @@
 package com.skydev.jokesmvc.joke;
 
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.Arguments;
-import org.junit.jupiter.params.provider.MethodSource;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.webmvc.test.autoconfigure.WebMvcTest;
-import org.springframework.test.context.bean.override.mockito.MockitoBean;
-import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
-
-import java.util.stream.Stream;
-
 import static org.hamcrest.Matchers.containsString;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -20,11 +9,23 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
 
+import java.util.stream.Stream;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.webmvc.test.autoconfigure.WebMvcTest;
+import org.springframework.test.context.bean.override.mockito.MockitoBean;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
+
 @WebMvcTest(
 		controllers = JokeController.class,
 		properties = {
 				"jokes-mvc.openai.api-key=test",
 				"jokes-mvc.openai.url=https://example.com",
+				"jokes-mvc.openai.model=gpt-3.5-turbo",
+				"jokes-mvc.openai.prompt=Tell me a short joke.",
 				"jokes-mvc.icanhazdadjoke.url=https://example.com"
 		}
 )

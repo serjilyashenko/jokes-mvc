@@ -26,7 +26,10 @@ class IcanhazdadjokeClientTest {
     ApplicationProperties properties =
         new ApplicationProperties(
             new ApplicationProperties.Openai(
-                "test-key", "https://api.openai.com/v1", "gpt-4o-mini"),
+                "test-key",
+                "https://api.openai.com/v1",
+                "gpt-4o-mini",
+                "Tell me a short joke."),
             new ApplicationProperties.Icanhazdadjoke("https://icanhazdadjoke.com"));
     client = new IcanhazdadjokeClient(builder, properties);
   }

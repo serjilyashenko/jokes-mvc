@@ -13,18 +13,15 @@ import org.springframework.web.client.RestClientResponseException;
 @Slf4j
 public class OpenaiClient {
 
-  private static final String PROMPT = "Tell me a short joke.";
-
   private final RestClient restClient;
-  private final String model;
+  private final ApplicationProperties applicationProperties;
 
   public OpenaiClient(
       RestClient.Builder restClientBuilder, ApplicationProperties applicationProperties) {
     ApplicationProperties.Openai openaiProperties = applicationProperties.openai();
-
+    this.applicationProperties = applicationProperties;
     String url = openaiProperties.url();
     String apiKey = openaiProperties.apiKey();
-    this.model = openaiProperties.model();
 
     this.restClient =
         restClientBuilder
@@ -36,7 +33,10 @@ public class OpenaiClient {
 
   public String getJoke() {
     try {
-      OpenaiRequest openaiRequest = new OpenaiRequest(model, PROMPT);
+      String model = applicationProperties.openai().model();
+      String prompt = applicationProperties.openai().prompt();
+      OpenaiRequest openaiRequest = new OpenaiRequest(model, prompt);
+
       OpenaiResponse response =
           restClient
               .post()

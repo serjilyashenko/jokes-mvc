@@ -29,7 +29,10 @@ class OpenaiClientTest {
     ApplicationProperties properties =
         new ApplicationProperties(
             new ApplicationProperties.Openai(
-                "test-key", "https://api.openai.com/v1", "gpt-3.5-turbo"),
+                "test-key",
+                "https://api.openai.com/v1",
+                "gpt-3.5-turbo",
+                "Tell me a short joke."),
             new ApplicationProperties.Icanhazdadjoke("https://icanhazdadjoke.com"));
     client = new OpenaiClient(builder, properties);
   }
