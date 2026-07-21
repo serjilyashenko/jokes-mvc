@@ -32,7 +32,7 @@ class OpenaiClientTest {
                 "test-key",
                 "https://api.openai.com/v1",
                 "gpt-3.5-turbo",
-                "Tell me a short joke."),
+                "Tell me one short, random joke."),
             new ApplicationProperties.Icanhazdadjoke("https://icanhazdadjoke.com"));
     client = new OpenaiClient(builder, properties);
   }
@@ -50,7 +50,7 @@ class OpenaiClientTest {
                     """
                     {
                       "model": "gpt-3.5-turbo",
-                      "input": "Tell me a short joke."
+                      "input": "Tell me one short, random joke."
                     }
                     """))
         .andRespond(

@@ -35,8 +35,8 @@ public class OpenaiClient {
     try {
       String model = applicationProperties.openai().model();
       String prompt = applicationProperties.openai().prompt();
-      OpenaiRequest openaiRequest = new OpenaiRequest(model, prompt);
 
+      OpenaiRequest openaiRequest = new OpenaiRequest(model, prompt);
       OpenaiResponse response =
           restClient
               .post()
@@ -68,7 +68,7 @@ public class OpenaiClient {
     if (response == null || response.output() == null || response.output().isEmpty()) {
       return null;
     }
-    OpenaiResponse.Output output = response.output().getFirst();
+    OpenaiResponse.Output output = response.output().getLast();
     if (output == null || output.content() == null || output.content().isEmpty()) {
       return null;
     }

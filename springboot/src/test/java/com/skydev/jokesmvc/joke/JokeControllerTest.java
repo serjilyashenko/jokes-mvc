@@ -20,49 +20,51 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
 
 @WebMvcTest(
-		controllers = JokeController.class,
-		properties = {
-				"jokes-mvc.openai.api-key=test",
-				"jokes-mvc.openai.url=https://example.com",
-				"jokes-mvc.openai.model=gpt-3.5-turbo",
-				"jokes-mvc.openai.prompt=Tell me a short joke.",
-				"jokes-mvc.icanhazdadjoke.url=https://example.com"
-		}
-)
+    controllers = JokeController.class,
+    properties = {
+      "jokes-mvc.openai.api-key=test",
+      "jokes-mvc.openai.url=https://example.com",
+      "jokes-mvc.openai.model=gpt-3.5-turbo",
+      "jokes-mvc.openai.prompt=Tell me a short joke.",
+      "jokes-mvc.icanhazdadjoke.url=https://example.com"
+    })
 class JokeControllerTest {
 
-	@Autowired
-	private MockMvc mockMvc;
+  @Autowired private MockMvc mockMvc;
 
-	@MockitoBean
-	private JokeService jokeService;
+  @MockitoBean private JokeService jokeService;
 
-	@ParameterizedTest(name = "GET /jokes/new?source={0}")
-	@MethodSource("createFormScenarios")
-	void createForm_returnsCreatePageWithJokeForm(String sourceParam, JokeForm jokeForm) throws Exception {
-		when(jokeService.newJokeForm(jokeForm.source())).thenReturn(jokeForm);
+  @ParameterizedTest(name = "GET /jokes/new?source={0}")
+  @MethodSource("createFormScenarios")
+  void createForm_returnsCreatePageWithJokeForm(String sourceParam, JokeForm jokeForm)
+      throws Exception {
+    when(jokeService.newJokeForm(jokeForm.source())).thenReturn(jokeForm);
 
-		MockHttpServletRequestBuilder request = get("/jokes/new");
-		if (sourceParam != null) {
-			request = request.param("source", sourceParam);
-		}
+    MockHttpServletRequestBuilder request = get("/jokes/new");
+    if (sourceParam != null) {
+      request = request.param("source", sourceParam);
+    }
 
-		mockMvc.perform(request)
-				.andExpect(status().isOk())
-				.andExpect(view().name("jokes/create"))
-				.andExpect(model().attribute("jokeForm", jokeForm))
-				.andExpect(content().string(containsString(jokeForm.content())))
-				.andExpect(content().string(containsString(jokeForm.source().getValue())))
-				.andExpect(content().string(containsString("readonly")));
+    mockMvc
+        .perform(request)
+        .andExpect(status().isOk())
+        .andExpect(view().name("jokes/create"))
+        .andExpect(model().attribute("jokeForm", jokeForm))
+        .andExpect(content().string(containsString(jokeForm.content())))
+        .andExpect(content().string(containsString(jokeForm.source().getValue())))
+        .andExpect(content().string(containsString("readonly")));
 
-		verify(jokeService).newJokeForm(jokeForm.source());
-	}
+    verify(jokeService).newJokeForm(jokeForm.source());
+  }
 
-	private static Stream<Arguments> createFormScenarios() {
-		return Stream.of(
-				Arguments.of(null, new JokeForm(JokeSource.OPENAI, "Why did the chicken cross the road?")),
-				Arguments.of("OPENAI", new JokeForm(JokeSource.OPENAI, "Why did the chicken cross the road?")),
-				Arguments.of("ICANHAZDADJOKE", new JokeForm(JokeSource.ICANHAZDADJOKE, "What do you call a fake noodle? An impasta."))
-		);
-	}
+  private static Stream<Arguments> createFormScenarios() {
+    return Stream.of(
+        Arguments.of(null, new JokeForm(JokeSource.OPENAI, "Why did the chicken cross the road?")),
+        Arguments.of(
+            "OPENAI", new JokeForm(JokeSource.OPENAI, "Why did the chicken cross the road?")),
+        Arguments.of(
+            "ICANHAZDADJOKE",
+            new JokeForm(
+                JokeSource.ICANHAZDADJOKE, "What do you call a fake noodle? An impasta.")));
+  }
 }
