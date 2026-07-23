@@ -13,6 +13,9 @@ import org.springframework.web.client.RestClientResponseException;
 @Slf4j
 public class OpenaiClient {
 
+  private static final String PING_PROMPT = "Answer with pong in lower case without anything else.";
+  private static final String PONG = "pong";
+
   private final RestClient restClient;
   private final ApplicationProperties applicationProperties;
 
@@ -33,19 +36,8 @@ public class OpenaiClient {
 
   public String getJoke() {
     try {
-      String model = applicationProperties.openai().model();
       String prompt = applicationProperties.openai().prompt();
-
-      OpenaiRequest openaiRequest = new OpenaiRequest(model, prompt);
-      OpenaiResponse response =
-          restClient
-              .post()
-              .uri("/responses")
-              .body(openaiRequest)
-              .retrieve()
-              .body(OpenaiResponse.class);
-
-      String joke = extractJoke(response);
+      String joke = getResponse(prompt);
       if (joke == null || joke.isBlank()) {
         throw new IllegalStateException("OpenAI API returned an empty joke");
       }
@@ -64,7 +56,43 @@ public class OpenaiClient {
     }
   }
 
-  private static String extractJoke(OpenaiResponse response) {
+  public boolean ping() {
+    try {
+      String response = getResponse(PING_PROMPT);
+      boolean ok = PONG.equals(response == null ? null : response.trim());
+      if (ok) {
+        log.info("OpenAI API ping succeeded");
+      } else {
+        log.warn("OpenAI API ping failed: expected '{}' but got '{}'", PONG, response);
+      }
+      return ok;
+    } catch (RestClientResponseException exception) {
+      log.error(
+          "Failed to ping OpenAI API: status={} responseBody={}",
+          exception.getStatusCode(),
+          exception.getResponseBodyAsString(),
+          exception);
+      throw exception;
+    } catch (Exception exception) {
+      log.error("Failed to ping OpenAI API", exception);
+      throw exception;
+    }
+  }
+
+  private String getResponse(String prompt) {
+    String model = applicationProperties.openai().model();
+    OpenaiRequest openaiRequest = new OpenaiRequest(model, prompt);
+    OpenaiResponse response =
+        restClient
+            .post()
+            .uri("/responses")
+            .body(openaiRequest)
+            .retrieve()
+            .body(OpenaiResponse.class);
+    return extractText(response);
+  }
+
+  private static String extractText(OpenaiResponse response) {
     if (response == null || response.output() == null || response.output().isEmpty()) {
       return null;
     }

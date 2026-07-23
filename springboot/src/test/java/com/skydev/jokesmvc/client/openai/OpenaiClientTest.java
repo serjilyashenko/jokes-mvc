@@ -119,4 +119,79 @@ class OpenaiClientTest {
 
     server.verify();
   }
+
+  @Test
+  void ping_returnsTrueWhenModelRepliesPong() {
+    server
+        .expect(requestTo("https://api.openai.com/v1/responses"))
+        .andExpect(method(HttpMethod.POST))
+        .andExpect(
+            content()
+                .json(
+                    """
+                    {
+                      "model": "gpt-3.5-turbo",
+                      "input": "Answer with pong in lower case without anything else."
+                    }
+                    """))
+        .andRespond(
+            withSuccess(
+                """
+                {
+                  "id": "resp_123",
+                  "status": "completed",
+                  "output": [
+                    {
+                      "id": "msg_123",
+                      "type": "message",
+                      "status": "completed",
+                      "role": "assistant",
+                      "content": [
+                        {
+                          "type": "output_text",
+                          "text": "pong"
+                        }
+                      ]
+                    }
+                  ]
+                }
+                """,
+                MediaType.APPLICATION_JSON));
+
+    assertThat(client.ping()).isTrue();
+    server.verify();
+  }
+
+  @Test
+  void ping_returnsFalseWhenModelRepliesSomethingElse() {
+    server
+        .expect(requestTo("https://api.openai.com/v1/responses"))
+        .andExpect(method(HttpMethod.POST))
+        .andRespond(
+            withSuccess(
+                """
+                {
+                  "id": "resp_123",
+                  "status": "completed",
+                  "output": [
+                    {
+                      "id": "msg_123",
+                      "type": "message",
+                      "status": "completed",
+                      "role": "assistant",
+                      "content": [
+                        {
+                          "type": "output_text",
+                          "text": "Pong!"
+                        }
+                      ]
+                    }
+                  ]
+                }
+                """,
+                MediaType.APPLICATION_JSON));
+
+    assertThat(client.ping()).isFalse();
+    server.verify();
+  }
 }
