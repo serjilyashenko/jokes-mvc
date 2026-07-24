@@ -1,3 +1,3 @@
 package com.skydev.jokesmvc.joke;
 
-public record JokeForm( JokeSource source, String content) { }
+public record JokeForm(JokeSource source, String content, boolean openaiUnavailable) {}

@@ -72,10 +72,10 @@ public class OpenaiClient {
           exception.getStatusCode(),
           exception.getResponseBodyAsString(),
           exception);
-      throw exception;
+      return false;
     } catch (Exception exception) {
       log.error("Failed to ping OpenAI API", exception);
-      throw exception;
+      return false;
     }
   }
 

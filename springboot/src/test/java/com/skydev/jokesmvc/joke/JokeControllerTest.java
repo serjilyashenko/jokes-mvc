@@ -59,12 +59,16 @@ class JokeControllerTest {
 
   private static Stream<Arguments> createFormScenarios() {
     return Stream.of(
-        Arguments.of(null, new JokeForm(JokeSource.OPENAI, "Why did the chicken cross the road?")),
         Arguments.of(
-            "OPENAI", new JokeForm(JokeSource.OPENAI, "Why did the chicken cross the road?")),
+            null, new JokeForm(JokeSource.OPENAI, "Why did the chicken cross the road?", false)),
+        Arguments.of(
+            "OPENAI",
+            new JokeForm(JokeSource.OPENAI, "Why did the chicken cross the road?", false)),
         Arguments.of(
             "ICANHAZDADJOKE",
             new JokeForm(
-                JokeSource.ICANHAZDADJOKE, "What do you call a fake noodle? An impasta.")));
+                JokeSource.ICANHAZDADJOKE,
+                "What do you call a fake noodle? An impasta.",
+                false)));
   }
 }

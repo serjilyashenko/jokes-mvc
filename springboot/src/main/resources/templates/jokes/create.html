@@ -18,6 +18,10 @@
     <a th:href="@{/jokes/new(source=${T(com.skydev.jokesmvc.joke.JokeSource).ICANHAZDADJOKE})}">icanhazdadjoke</a>
   </div>
 
+  <p th:if="${jokeForm.openaiUnavailable}">
+    ⚠️Check your OpenAI key in application-local.properties; showing a joke from icanhazdadjoke instead.
+  </p>
+
   <br/>
 
   <form action="/jokes/new" th:object="${jokeForm}" method="post">
